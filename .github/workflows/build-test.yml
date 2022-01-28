@@ -1,0 +1,41 @@
+name: build & test
+on:
+  push:
+    branches: main
+    paths:
+      - '**.py'
+      - .github/workflows/build-test.yml
+      - 'pyproject.toml'
+      - 'spec.json'
+  pull_request:
+    paths:
+      - '**.py'
+      - .github/workflows/build-test.yml
+      - 'pyproject.toml'
+      - 'spec.json'
+jobs:
+  build-test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run pytest
+        shell: bash
+        run: |
+          ./conversion_obj_step.py
+        env:
+          KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
