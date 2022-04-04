@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from kittycad.client import ClientFromEnv
 from kittycad.models import FileConversion, ValidSourceFileFormat, ValidOutputFileFormat
 from kittycad.api.file import post_file_conversion_with_base64_helper
