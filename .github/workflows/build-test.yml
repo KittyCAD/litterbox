@@ -33,7 +33,7 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run pytest
+      - name: Run scripts
         shell: bash
         run: |
           ./conversion_obj_step.py
