@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from kittycad.client import ClientFromEnv
-from kittycad.models import FileConversion, ValidSourceFileFormat, ValidOutputFileFormat
-from kittycad.api.file import post_file_conversion_with_base64_helper
+from kittycad.models import FileConversionWithOutput, FileConversionSourceFormat, FileConversionOutputFormat
+from kittycad.api.file import create_file_conversion_with_base64_helper
 import json
 
 # Create a new client with your token parsed from the environment variable:
@@ -14,7 +14,7 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fc: FileConversion = post_file_conversion_with_base64_helper.sync(client=client, body=content, source_format=ValidSourceFileFormat.OBJ, output_format=ValidOutputFileFormat.STEP)
+fc: FileConversionWithOutput = create_file_conversion_with_base64_helper.sync(client=client, body=content, source_format=FileConversionSourceFormat.OBJ, output_format=FileConversionOutputFormat.STEP)
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")
