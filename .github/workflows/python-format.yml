@@ -1,0 +1,42 @@
+# adapted from:
+#
+# * base code: https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests/
+# * fix push auth: https://github.com/ad-m/github-push-action
+# * checkout PR head commit https://github.com/actions/checkout#checkout-pull-request-head-commit-instead-of-merge-commit
+name: auto-format
+permissions:
+    packages: read
+    contents: write
+on:
+    pull_request:
+        paths:
+            - '**.py'
+    workflow_dispatch:
+        inputs:
+jobs:
+    format:
+        # Check if the PR is not from a fork
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.ref }}
+            - name: autoyapf
+              id: autoyapf
+              uses: mritunjaysharma394/autoyapf@v2
+              with:
+                args: --style pep8 --recursive --in-place .
+            - name: Check for modified files
+              id: git-check
+              run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)
+
+            - name: Commit changes, if any
+              if: steps.git-check.outputs.modified == 'true'
+              run: |
+                  git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --local user.name "github-actions[bot]"
+                  git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+                  git fetch origin
+                  git commit -am "LOOK ON MY REFORMAT, YE MIGHTY, AND DESPAIR!"
+                  git push origin ${{github.event.pull_request.head.ref }}
