@@ -3,7 +3,7 @@
 # * base code: https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests/
 # * fix push auth: https://github.com/ad-m/github-push-action
 # * checkout PR head commit https://github.com/actions/checkout#checkout-pull-request-head-commit-instead-of-merge-commit
-name: auto-format
+name: go-format
 permissions:
     packages: read
     contents: write
@@ -29,12 +29,10 @@ jobs:
               uses: actions/setup-go@v2.1.5
               with:
                 go-version: ${{ matrix.go-version }}
-            - name: "get golang version"
-              run: echo "::set-env name=golang-version::$(go version)"
             - uses: actions/cache@v2.1.7
               with:
                 path: ~/go
-                key: go-${{ env.golang-version }}
+                key: go-${{ matrix.go-version }}
             - name: installing golines
               run: go get -u github.com/segmentio/golines
             - uses: actions/checkout@v3
