@@ -20,10 +20,10 @@ func main() {
 
 	input, _ := os.Open("./ORIGINALVOXEL-3.obj")
 
-	content, _ := ioutil.ReadAll(bufio.NewReader(input))
+	contentButAVeryVeryVeryVeryVeryVeryVeryVeryLongName, _ := ioutil.ReadAll(bufio.NewReader(input))
 
 	// Encode as base64.
-	myReader := strings.NewReader(base64.StdEncoding.EncodeToString(content))
+	myReader := strings.NewReader(base64.StdEncoding.EncodeToString(contentButAVeryVeryVeryVeryVeryVeryVeryVeryLongName))
 
 	fc, err := client.File.CreateConversion("step", "obj", myReader)
 	if err != nil {
