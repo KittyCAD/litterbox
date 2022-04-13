@@ -14,13 +14,17 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fc: FileConversionWithOutput = create_file_conversion_with_base64_helper.sync(client=client, body=content, src_format=FileConversionSourceFormat.OBJ, output_format=FileConversionOutputFormat.STL)
+fc: FileConversionWithOutput = create_file_conversion_with_base64_helper.sync(
+    client=client,
+    body=content,
+    src_format=FileConversionSourceFormat.OBJ,
+    output_format=FileConversionOutputFormat.STL)
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")
 
 output_file_path = "./output.stl"
 print(f"Saving output to {output_file_path}")
-output_file = open(output_file_path ,"wb")
+output_file = open(output_file_path, "wb")
 output_file.write(fc.output)
 output_file.close()
