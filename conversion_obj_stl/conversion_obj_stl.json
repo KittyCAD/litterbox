@@ -3,13 +3,11 @@
   "files": [
     {
       "extension": "go",
-      "nonEditableLinesFromStart": 5,
-      "nonEditableLinesFromEnd": 5
+      "range": [19, 16]
     },
     {
       "extension": "py",
-      "nonEditableLinesFromStart": 4,
-      "nonEditableLinesFromEnd": 6
+      "range": [16, 5]
     }
   ]
 }
