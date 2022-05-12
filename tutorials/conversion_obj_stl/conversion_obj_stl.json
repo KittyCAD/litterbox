@@ -1,0 +1,13 @@
+{
+  "name": "title",
+  "files": [
+    {
+      "extension": "go",
+      "range": [21, 17]
+    },
+    {
+      "extension": "py",
+      "range": [16, 6]
+    }
+  ]
+}
