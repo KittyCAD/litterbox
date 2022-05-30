@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
 jobs:
-  build-test:
+  build-test-python-versions:
 
     runs-on: ubuntu-latest
     strategy:
@@ -37,7 +37,64 @@ jobs:
       - name: Run scripts
         shell: bash
         run: |
-          fileName=$(find ${{ matrix.test-path }} -name "*.py")
-          python $fileName
+          FILE=$(find ${{ matrix.test-path }} -name "*.py")
+          python $FILE
         env:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+
+
+  test-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: remove previous outputs
+        shell: bash
+        run: rm -rf tutorials/**/*output.{stl,step}
+
+  test-output:
+    needs: [build-test]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+        test-path: 
+          - ./tutorials/conversion_obj_step
+          - ./tutorials/conversion_obj_stl
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run scripts
+        shell: bash
+        run: |
+          python ${{ matrix.test-path }}
+        env:
+          KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+          
+      - name: Check output
+        shell: bash
+        run: |
+          FILE=./tutorials/conversion_obj_step
+          if [ $(find ${{ matrix.test-path }} -name output.*)  ]; then
+              echo "${{ matrix.test-path }} output was created."
+          else 
+              exit 1
+          fi
+      - name: git status
+        run: git status
+
+    
+  commit-files:
+    needs: [build-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: git status
+        run: git status
+      
