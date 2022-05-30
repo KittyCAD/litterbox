@@ -51,7 +51,7 @@ jobs:
         run: rm -rf tutorials/**/*output.{stl,step}
 
   test-output:
-    needs: [build-test]
+    needs: [test-setup]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -92,7 +92,7 @@ jobs:
 
     
   commit-files:
-    needs: [build-test]
+    needs: [test-output]
     runs-on: ubuntu-latest
     steps:
       - name: git status
