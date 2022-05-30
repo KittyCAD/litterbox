@@ -118,6 +118,12 @@ jobs:
             FULL_FILE=$(find $FILE -name "*.py")
             python $FULL_FILE
             mv output.* $FILE
+            OUTPUT_FILE=$(find $FILE -name output.*)
+            if [[ $OUTPUT_FILE == *.step ]]
+              # current date is added to step file, meaning there will always be a diff, clamping this to a consistent date to prevent this 
+              then
+                sed -i 's/20..-..-..T..:..:../2022-00-00T00:00:00/g' $OUTPUT_FILE
+            fi
             if [ $(find $FILE -name output.*)  ]; then
                 echo "$FILE output was created."
             else 
