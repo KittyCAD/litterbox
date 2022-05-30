@@ -13,7 +13,6 @@ client = ClientFromEnv()
 file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
-print("hmmMMMMm")
 
 fc: FileConversionWithOutput = create_file_conversion_with_base64_helper.sync(
     client=client,
@@ -21,7 +20,6 @@ fc: FileConversionWithOutput = create_file_conversion_with_base64_helper.sync(
     src_format=FileConversionSourceFormat.OBJ,
     output_format=FileConversionOutputFormat.STL)
 
-print(f"hmmm: {fc}")
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")
 

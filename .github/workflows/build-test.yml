@@ -80,7 +80,10 @@ jobs:
   #       shell: bash
   #       run: rm -rf tutorials/**/*output.{stl,step}
 
-  test-output:
+  commit-script-outputs:
+    # Using the python script to commit the output of the scripts
+    # The go scripts should have the same output
+    # This implicitly makes python the source of truth for the outputs
     needs: [build-test-python-versions]
     runs-on: ubuntu-latest
     strategy:
@@ -88,6 +91,8 @@ jobs:
         python-version: [3.9]
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
@@ -110,16 +115,15 @@ jobs:
           )
           for FILE in "${files[@]}"
           do
-              FULL_FILE=$(find $FILE -name "*.py")
-              echo "bing $FULL_FILE"
-              python $FULL_FILE
-              mv output.* $FILE
-              if [ $(find $FILE -name output.*)  ]; then
-                  echo "$FILE output was created."
-              else 
-                  echo "better luck next time"
-                  exit 1
-              fi
+            FULL_FILE=$(find $FILE -name "*.py")
+            python $FULL_FILE
+            mv output.* $FILE
+            if [ $(find $FILE -name output.*)  ]; then
+                echo "$FILE output was created."
+            else 
+                echo "better luck next time $FILE output was NOT created"
+                exit 1
+            fi
             echo "done $FILE"
           done
 
@@ -127,36 +131,23 @@ jobs:
         env:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
-      # - name: Run scripts
-      #   shell: bash
-      #   run: |
-      #     FILE=$(find ${{ matrix.test-path }} -name "*.py")
-      #     python $FILE
-      #   env:
-      #     KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-      
-      # - name: move test output into it's directory
-      #   run: mv output.* ${{ matrix.test-path }}
+
+      - name: stage outputs
+        run: git add "tutorials/**/*output.*"
 
       - name: git status
         run: git status
-          
-      # - name: Check output
-      #   shell: bash
-      #   run: |
-      #     if [ $(find ${{ matrix.test-path }} -name output.*)  ]; then
-      #         echo "${{ matrix.test-path }} output was created."
-      #     else
-      #         echo "no luck"
-      #         exit 1
-      #     fi
-
-    
-  # commit-files:
-  #   needs: [test-output]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: git status
-  #       run: git status
       
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)
+
+      - name: Commit changes, if any
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            git fetch origin
+            git commit -am "Updating script outputs"
+            git push origin ${{github.event.pull_request.head.ref }}
