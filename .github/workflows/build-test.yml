@@ -74,8 +74,11 @@ jobs:
       - name: Run scripts
         shell: bash
         run: |
-          FILE=$(find ${{ matrix.test-path }} -name "*.py")
-          python $FILE
+          (
+            cd ${{ matrix.test-path }}
+            FILE=$(find . -name "*.py")
+            python $FILE
+          )
         env:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
@@ -89,7 +92,6 @@ jobs:
               echo "${{ matrix.test-path }} output was created."
           else
               echo "no luck"
-              git status
               exit 1
           fi
 
