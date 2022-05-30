@@ -43,22 +43,19 @@ jobs:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
 
-  test-setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: remove previous outputs
-        shell: bash
-        run: rm -rf tutorials/**/*output.{stl,step}
+  # test-setup:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: remove previous outputs
+  #       shell: bash
+  #       run: rm -rf tutorials/**/*output.{stl,step}
 
   test-output:
-    needs: [test-setup]
+    # needs: [test-setup]
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.9]
-        test-path: 
-          - ./tutorials/conversion_obj_step
-          - ./tutorials/conversion_obj_stl
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -71,36 +68,63 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run scripts
+      - name: remove previous outputs
         shell: bash
+        run: rm -rf tutorials/**/*output.{stl,step}
+
+      - name: test outputs
         run: |
-          FILE=$(find ${{ matrix.test-path }} -name "*.py")
-          python $FILE
-        env:
-          KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+
+          files=( "./tutorials/conversion_obj_step"
+                  "./tutorials/conversion_obj_stl" 
+          )
+          for FILE in "${files[@]}"
+          do
+              FULL_FILE=$(find $FILE -name "*.py")
+              echo "bing $FULL_FILE"
+              python3 $FULL_FILE
+              mv output.* $FILE
+              if [ $(find $FILE -name output.*)  ]; then
+                  echo "$FILE output was created."
+              else 
+                  echo "better luck next time"
+                  exit 1
+              fi
+            echo "done $FILE"
+          done
+
+          echo "all done"
+
+      # - name: Run scripts
+      #   shell: bash
+      #   run: |
+      #     FILE=$(find ${{ matrix.test-path }} -name "*.py")
+      #     python $FILE
+      #   env:
+      #     KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
       
-      - name: move test output into it's directory
-        run: mv output.* ${{ matrix.test-path }}
+      # - name: move test output into it's directory
+      #   run: mv output.* ${{ matrix.test-path }}
 
       - name: git status
         run: git status
           
-      - name: Check output
-        shell: bash
-        run: |
-          if [ $(find ${{ matrix.test-path }} -name output.*)  ]; then
-              echo "${{ matrix.test-path }} output was created."
-          else
-              echo "no luck"
-              exit 1
-          fi
+      # - name: Check output
+      #   shell: bash
+      #   run: |
+      #     if [ $(find ${{ matrix.test-path }} -name output.*)  ]; then
+      #         echo "${{ matrix.test-path }} output was created."
+      #     else
+      #         echo "no luck"
+      #         exit 1
+      #     fi
 
     
-  commit-files:
-    needs: [test-output]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: git status
-        run: git status
+  # commit-files:
+  #   needs: [test-output]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: git status
+  #       run: git status
       
