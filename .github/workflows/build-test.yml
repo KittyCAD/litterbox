@@ -82,7 +82,7 @@ jobs:
           do
               FULL_FILE=$(find $FILE -name "*.py")
               echo "bing $FULL_FILE"
-              python3 $FULL_FILE
+              python $FULL_FILE
               mv output.* $FILE
               if [ $(find $FILE -name output.*)  ]; then
                   echo "$FILE output was created."
