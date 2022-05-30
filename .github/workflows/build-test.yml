@@ -12,6 +12,36 @@ on:
   workflow_dispatch:
     inputs:
 jobs:
+  build-test-go-versions:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: [1.18]
+        test-path: 
+          - ./tutorials/conversion_obj_step
+          - ./tutorials/conversion_obj_stl
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go ${{ matrix.go-version }}
+      - uses: actions/setup-go@v3
+        with:
+          python-version: ${{ matrix.go-version }}
+
+      # - name: Install dependencies
+      #   shell: bash
+      #   run: |
+      #     pip install -r requirements.txt
+
+      - name: Run scripts
+        shell: bash
+        run: |
+          FILE=$(find ${{ matrix.test-path }} -name "*.go")
+          go run $FILE
+        env:
+          KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+
   build-test-python-versions:
 
     runs-on: ubuntu-latest
