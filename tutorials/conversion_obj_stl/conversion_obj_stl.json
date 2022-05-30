@@ -1,6 +1,7 @@
 {
   "name": "title",
-  "output": "output.stl",
+  "outputPath": "tutorials/conversion_obj_stl/output.stl",
+  "outputFormat": "stl",
   "files": [
     {
       "extension": "go",
