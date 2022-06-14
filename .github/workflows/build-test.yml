@@ -53,6 +53,8 @@ jobs:
         test-path: 
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
+          - ./tutorials/get_mass/get_mass.py
+          - ./tutorials/get_volume/get_volume.py
 
     steps:
       - uses: actions/checkout@v3
