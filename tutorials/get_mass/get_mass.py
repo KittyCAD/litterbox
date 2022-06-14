@@ -3,6 +3,7 @@ from kittycad.client import ClientFromEnv
 from kittycad.models import file_source_format
 from kittycad.api.file import create_file_mass
 from kittycad.models import FileMass
+import json
 
 # Create a new client with your token parsed from the environment variable:
 #   KITTYCAD_API_TOKEN.
@@ -13,12 +14,18 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-print(file_source_format.FileSourceFormat.OBJ)
-
+steelDensityPerCubicMillimeter = 0.00785
 fm: FileMass = create_file_mass.sync(
     client=client,
-    material_density=5.0,
+    material_density=steelDensityPerCubicMillimeter,
     src_format=file_source_format.FileSourceFormat.OBJ,
     body=content)
 
-print(f"File mass: {fm}")
+print(f"File mass (grams): {fm.mass}")
+
+with open('output.json', 'w', encoding='utf-8') as f:
+    json.dump({
+        "id": fm.id,
+        "status": fm.status,
+        "mass": fm.mass,
+    }, f, ensure_ascii=False, indent=4)
