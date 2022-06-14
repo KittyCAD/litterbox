@@ -26,4 +26,7 @@ with open('output.json', 'w', encoding='utf-8') as f:
         "id": fv.id,
         "status": fv.status,
         "volume": fv.volume,
-    }, f, ensure_ascii=False, indent=4)
+    },
+              f,
+              ensure_ascii=False,
+              indent=4)

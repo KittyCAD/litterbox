@@ -28,4 +28,7 @@ with open('output.json', 'w', encoding='utf-8') as f:
         "id": fm.id,
         "status": fm.status,
         "mass": fm.mass,
-    }, f, ensure_ascii=False, indent=4)
+    },
+              f,
+              ensure_ascii=False,
+              indent=4)
