@@ -23,8 +23,8 @@ jobs:
         test-path: 
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
-          - ./tutorials/get_mass/get_mass
-          - ./tutorials/get_volume/get_volume
+          - ./tutorials/get_mass
+          - ./tutorials/get_volume
 
     steps:
       - uses: actions/checkout@v3
@@ -54,9 +54,9 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
         test-path: 
           - ./tutorials/conversion_obj_step
-          - ./tutorials/conversion_obj_st
-          - ./tutorials/get_mass/get_mass
-          - ./tutorials/get_volume/get_volume
+          - ./tutorials/conversion_obj_stl
+          - ./tutorials/get_mass
+          - ./tutorials/get_volume
 
     steps:
       - uses: actions/checkout@v3
