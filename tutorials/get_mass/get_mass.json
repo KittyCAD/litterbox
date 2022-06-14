@@ -1,0 +1,15 @@
+{
+  "name": "title",
+  "outputPath": "tutorials/get_mass/output.json",
+  "outputFormat": "json",
+  "files": [
+    {
+      "extension": "go",
+      "range": [22, 17]
+    },
+    {
+      "extension": "py",
+      "range": [16, 6]
+    }
+  ]
+}
