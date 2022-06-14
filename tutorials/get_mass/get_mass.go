@@ -28,7 +28,11 @@ func main() {
 
 	densitySteelGramsPerCubicMillimeter := 0.00784
 
-	fc, err := client.File.CreateMass(densitySteelGramsPerCubicMillimeter, "obj", myReader)
+	fc, err := client.File.CreateMass(
+		densitySteelGramsPerCubicMillimeter,
+		"obj",
+		myReader,
+	)
 	if err != nil {
 		panic(err)
 	}
