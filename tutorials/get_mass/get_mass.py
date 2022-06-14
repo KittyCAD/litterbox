@@ -19,7 +19,6 @@ fm: FileMass = create_file_mass.sync(
     client=client,
     material_density=5.0,
     src_format=file_source_format.FileSourceFormat.OBJ,
-    body=content
-)
+    body=content)
 
 print(f"File mass: {fm}")

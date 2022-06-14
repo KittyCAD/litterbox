@@ -18,7 +18,6 @@ print(file_source_format.FileSourceFormat.OBJ)
 fv: FileMass = create_file_volume.sync(
     client=client,
     src_format=file_source_format.FileSourceFormat.OBJ,
-    body=content
-)
+    body=content)
 
 print(f"File volume: {fv}")
