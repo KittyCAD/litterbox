@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from kittycad.client import ClientFromEnv
-from kittycad.models import FileConversionWithOutput, FileConversionSourceFormat, FileConversionOutputFormat
+from kittycad.models import file_output_format, file_source_format, file_conversion
 from kittycad.api.file import create_file_conversion_with_base64_helper
 import json
 
@@ -14,11 +14,11 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fc: FileConversionWithOutput = create_file_conversion_with_base64_helper.sync(
+fc: file_conversion.FileConversion = create_file_conversion_with_base64_helper.sync(
     client=client,
     body=content,
-    src_format=FileConversionSourceFormat.OBJ,
-    output_format=FileConversionOutputFormat.STL)
+    src_format=file_source_format.FileSourceFormat.OBJ,
+    output_format=file_output_format.FileOutputFormat.STL)
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")
