@@ -111,13 +111,15 @@ jobs:
 
       - name: remove previous outputs
         shell: bash
-        run: rm -rf tutorials/**/*output.{stl,step}
+        run: rm -rf tutorials/**/*output.{stl,step,json}
 
       - name: test outputs
         run: |
 
           files=( "./tutorials/conversion_obj_step"
-                  "./tutorials/conversion_obj_stl" 
+                  "./tutorials/conversion_obj_stl"
+                  "./tutorials/get_mass"
+                  "./tutorials/get_volume"
           )
           for FILE in "${files[@]}"
           do
