@@ -6,8 +6,8 @@
         "format": "json"
     },
     {
-        "path": "tutorials/get_mass/output.stl",
-        "format": "stl"
+        "path": "tutorials/get_mass/output.obj",
+        "format": "obj"
     }
   ],
   "files": [
