@@ -109,7 +109,7 @@ jobs:
 
       - name: remove previous outputs
         shell: bash
-        run: rm -rf tutorials/**/*output.{stl,step,json}
+        run: rm -rf tutorials/**/*output.{stl,obj,step,json}
 
       - name: test outputs
         run: |
