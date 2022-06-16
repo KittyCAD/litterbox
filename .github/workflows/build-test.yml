@@ -23,8 +23,7 @@ jobs:
         test-path: 
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
-          - ./tutorials/get_mass
-          - ./tutorials/get_volume
+          - ./tutorials/get_mass_volume
 
     steps:
       - uses: actions/checkout@v3
@@ -55,8 +54,7 @@ jobs:
         test-path: 
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
-          - ./tutorials/get_mass
-          - ./tutorials/get_volume
+          - ./tutorials/get_mass_volume
 
     steps:
       - uses: actions/checkout@v3
@@ -118,8 +116,7 @@ jobs:
 
           files=( "./tutorials/conversion_obj_step"
                   "./tutorials/conversion_obj_stl"
-                  "./tutorials/get_mass"
-                  "./tutorials/get_volume"
+                  "./tutorials/get_mass_volume"
           )
           for FILE in "${files[@]}"
           do
