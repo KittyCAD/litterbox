@@ -30,7 +30,7 @@ print(f"File volume (mm³): {fv.volume}")
 
 with open('output.json', 'w', encoding='utf-8') as f:
     json.dump({
-        "ids": [fm.id, fv.id],
+        "title": "output.json",
         "volume": fv.volume,
         "mass": fm.mass,
     },
