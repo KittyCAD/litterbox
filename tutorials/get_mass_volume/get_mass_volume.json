@@ -1,0 +1,23 @@
+{
+  "name": "title",
+  "outputs": [
+    {
+        "path": "tutorials/get_mass_volume/output.json",
+        "format": "json"
+    },
+    {
+        "path": "tutorials/get_mass_volume/output.obj",
+        "format": "obj"
+    }
+  ],
+  "files": [
+    {
+      "extension": "go",
+      "range": [21, 10]
+    },
+    {
+      "extension": "py",
+      "range": [15, 11]
+    }
+  ]
+}

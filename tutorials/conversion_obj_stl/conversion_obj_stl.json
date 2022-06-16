@@ -2,6 +2,13 @@
   "name": "title",
   "outputPath": "tutorials/conversion_obj_stl/output.stl",
   "outputFormat": "stl",
+  "note": "outputPath, and outputFormat have been temp left in for backwards compat, but will be removed in the future",
+  "outputs": [
+    {
+        "path": "tutorials/conversion_obj_stl/output.stl",
+        "format": "stl"
+    }
+  ],
   "files": [
     {
       "extension": "go",
