@@ -38,7 +38,7 @@ func main() {
 	)
 
 	fmt.Println("File mass (g): ", fc.Mass)
-	fmt.Println("File volume (mm): ", fv.Volume)
+	fmt.Println("File volume (mm^3): ", fv.Volume)
 
 	json_data, _ := json.Marshal(struct {
 		Title  string  `json:"title"`
