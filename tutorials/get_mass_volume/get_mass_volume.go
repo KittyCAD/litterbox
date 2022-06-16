@@ -41,13 +41,13 @@ func main() {
 	fmt.Println("File volume (mm): ", fv.Volume)
 
 	json_data, _ := json.Marshal(struct {
-		Mass   float64         `json:"mass"`
-		Volume float64         `json:"volume"`
-		Ids    []kittycad.Uuid `json:"ids"`
+		Title  string  `json:"title"`
+		Mass   float64 `json:"mass"`
+		Volume float64 `json:"volume"`
 	}{
+		Title:  "output.json",
 		Mass:   fc.Mass,
 		Volume: fv.Volume,
-		Ids:    []kittycad.Uuid{fc.ID, fv.ID},
 	})
 
 	output_file_path := "./output.json"
