@@ -37,8 +37,8 @@ func main() {
 		volumeReader,
 	)
 
-	fmt.Println("File mass (g): ", fc)
-	fmt.Println("File volume (mm): ", fv)
+	fmt.Println("File mass (g): ", fc.Mass)
+	fmt.Println("File volume (mm): ", fv.Volume)
 
 	json_data, _ := json.Marshal(struct {
 		Mass   float64         `json:"mass"`
