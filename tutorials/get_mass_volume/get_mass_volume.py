@@ -35,8 +35,5 @@ partInfo = {
 }
 
 with open('output.json', 'w', encoding='utf-8') as f:
-    json.dump(partInfo,
-              f,
-              ensure_ascii=False,
-              indent=4)
+    json.dump(partInfo, f, ensure_ascii=False, indent=4)
 os.system("cp ./ORIGINALVOXEL-3.obj ./output.obj")
