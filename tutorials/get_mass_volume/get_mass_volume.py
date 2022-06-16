@@ -26,15 +26,14 @@ fv: FileVolume = create_file_volume.sync(
     body=content)
 
 print(f"File mass (grams): {fm.mass}")
-print(f"File volume (mm³): {fv.volume}")
+print(f"File volume (mm^3): {fv.volume}")
+
+partInfo = {
+    "title": "output.json",
+    "volume": fv.volume,
+    "mass": fm.mass,
+}
 
 with open('output.json', 'w', encoding='utf-8') as f:
-    json.dump({
-        "title": "output.json",
-        "volume": fv.volume,
-        "mass": fm.mass,
-    },
-              f,
-              ensure_ascii=False,
-              indent=4)
+    json.dump(partInfo, f, ensure_ascii=False, indent=4)
 os.system("cp ./ORIGINALVOXEL-3.obj ./output.obj")
