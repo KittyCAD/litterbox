@@ -21,7 +21,9 @@ func main() {
 	content, _ := ioutil.ReadAll(bufio.NewReader(input))
 	// Encode as base64.
 	massReader := strings.NewReader(base64.StdEncoding.EncodeToString(content))
-	volumeReader := strings.NewReader(base64.StdEncoding.EncodeToString(content))
+	volumeReader := strings.NewReader(
+		base64.StdEncoding.EncodeToString(content),
+	)
 
 	densitySteelGramsPerCubicMillimeter := 0.00784
 
@@ -39,13 +41,13 @@ func main() {
 	fmt.Println("File volume (mm): ", fv)
 
 	json_data, _ := json.Marshal(struct {
-		Mass   float64 `json:"mass"`
-		Volume float64 `json:"volume"`
-		Ids  []kittycad.Uuid `json:"ids"`
+		Mass   float64         `json:"mass"`
+		Volume float64         `json:"volume"`
+		Ids    []kittycad.Uuid `json:"ids"`
 	}{
 		Mass:   fc.Mass,
 		Volume: fv.Volume,
-		Ids:  []kittycad.Uuid{fc.ID, fv.ID},
+		Ids:    []kittycad.Uuid{fc.ID, fv.ID},
 	})
 
 	output_file_path := "./output.json"
