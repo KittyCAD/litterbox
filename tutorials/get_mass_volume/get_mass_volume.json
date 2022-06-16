@@ -2,11 +2,11 @@
   "name": "title",
   "outputs": [
     {
-        "path": "tutorials/get_mass/output.json",
+        "path": "tutorials/get_mass_volume/output.json",
         "format": "json"
     },
     {
-        "path": "tutorials/get_mass/output.obj",
+        "path": "tutorials/get_mass_volume/output.obj",
         "format": "obj"
     }
   ],
