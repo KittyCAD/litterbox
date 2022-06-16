@@ -129,7 +129,7 @@ jobs:
               then
                 sed -i 's/20..-..-..T..:..:../2022-00-00T00:00:00/g' $OUTPUT_FILE
             fi
-            if [ $(find $FILE -name output.*)  ]; then
+            if [ $(find $FILE -maxdepth 2 -name 'output.*' -print -quit )  ]; then
                 echo "$FILE output was created."
             else 
                 echo "better luck next time $FILE output was NOT created"
