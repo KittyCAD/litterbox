@@ -1,0 +1,24 @@
+{
+    "name": "title",
+    "outputs": [
+      {
+          "path": "samples/file_mass/output.json",
+          "format": "json"
+      },
+      {
+          "path": "samples/file_mass/output.obj",
+          "format": "obj"
+      }
+    ],
+    "files": [
+      {
+        "extension": "go",
+        "range": [21, 10]
+      },
+      {
+        "extension": "py",
+        "range": [15, 5]
+      }
+    ]
+  }
+  

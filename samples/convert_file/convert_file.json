@@ -1,0 +1,20 @@
+{
+    "name": "convert file",
+    "outputs": [
+      {
+          "path": "samples/convert_file/output.stl",
+          "format": "stl"
+      }
+    ],
+    "files": [
+      {
+        "extension": "go",
+        "range": [21, 17]
+      },
+      {
+        "extension": "py",
+        "range": [16, 6]
+      }
+    ]
+  }
+  
