@@ -29,15 +29,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: true
       - name: Set up Go ${{ matrix.go-version }}
         uses: actions/setup-go@v3
         with:
           python-version: ${{ matrix.go-version }}
-
-      # - name: Install dependencies
-      #   shell: bash
-      #   run: |
-      #     pip install -r requirements.txt
 
       - name: Run scripts
         shell: bash
