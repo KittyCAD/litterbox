@@ -35,11 +35,6 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go-version }}
-      
-      # - name: temp
-      #   run: |
-      #     rm -rf go.sum
-      #     go get github.com/kittycad/kittycad.go
 
       - name: Run scripts
         shell: bash
