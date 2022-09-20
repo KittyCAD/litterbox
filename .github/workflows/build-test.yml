@@ -43,6 +43,7 @@ jobs:
           go run $FILE
         env:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+          KITTYCAD_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
   build-test-python-versions:
 
@@ -59,6 +60,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: true
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -90,6 +93,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          lfs: true
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
