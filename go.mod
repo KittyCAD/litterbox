@@ -2,7 +2,7 @@ module litterbox/conversion_obj_step
 
 go 1.18
 
-require github.com/kittycad/kittycad.go v0.2.6
+require github.com/kittycad/kittycad.go v0.2.5
 
 require (
 	github.com/google/uuid v1.3.0 // indirect
