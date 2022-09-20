@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from kittycad.client import ClientFromEnv
-from kittycad.models import file_source_format, FileMass
-from kittycad.api.file import create_file_mass
+from kittycad.models import file_source_format, FileDensity
+from kittycad.api.file import create_file_density
 import json
 import os
 
@@ -14,18 +14,17 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-steelDensityPerCubicMillimeter = 0.00785
-fm: FileMass = create_file_mass.sync(
+fm: FileDensity = create_file_density.sync(
     client=client,
-    material_density=steelDensityPerCubicMillimeter,
+    material_mass=123,
     src_format=file_source_format.FileSourceFormat.OBJ,
     body=content)
 
-print(f"File mass (grams): {fm.mass}")
+print(f"File density: {fm.density}")
 
 partInfo = {
     "title": "output.json",
-    "mass": fm.mass,
+    "density": fm.density,
 }
 
 with open('output.json', 'w', encoding='utf-8') as f:

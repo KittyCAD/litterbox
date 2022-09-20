@@ -1,15 +1,11 @@
 package main
 
 import (
-	"bufio"
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/kittycad/kittycad.go"
-	"io/ioutil"
 	"os"
 	"os/exec"
-	"strings"
 )
 
 func main() {
@@ -17,17 +13,14 @@ func main() {
 	// KITTYCAD_API_TOKEN.
 	client, _ := kittycad.NewClientFromEnv("your apps user agent")
 
-	input, _ := os.Open("./ORIGINALVOXEL-3.obj")
-	content, _ := ioutil.ReadAll(bufio.NewReader(input))
-	// Encode as base64.
-	massReader := strings.NewReader(base64.StdEncoding.EncodeToString(content))
+	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 
 	densitySteelGramsPerCubicMillimeter := 0.00784
 
 	fc, _ := client.File.CreateMass(
 		densitySteelGramsPerCubicMillimeter,
 		"obj",
-		massReader,
+		fileBytes,
 	)
 
 	fmt.Println("File mass (g): ", fc.Mass)

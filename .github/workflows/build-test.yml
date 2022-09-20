@@ -29,15 +29,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: true
       - name: Set up Go ${{ matrix.go-version }}
         uses: actions/setup-go@v3
         with:
-          python-version: ${{ matrix.go-version }}
-
-      # - name: Install dependencies
-      #   shell: bash
-      #   run: |
-      #     pip install -r requirements.txt
+          go-version: ${{ matrix.go-version }}
 
       - name: Run scripts
         shell: bash
@@ -62,6 +59,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: true
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -93,6 +92,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          lfs: true
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:

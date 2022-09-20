@@ -17,27 +17,20 @@ func main() {
 
 	densitySteelGramsPerCubicMillimeter := 0.00784
 
-	fc, _ := client.File.CreateMass(
+	fc, _ := client.File.CreateDensity(
 		densitySteelGramsPerCubicMillimeter,
 		"obj",
 		fileBytes,
 	)
-	fv, _ := client.File.CreateVolume(
-		"obj",
-		fileBytes,
-	)
 
-	fmt.Println("File mass (g): ", fc.Mass)
-	fmt.Println("File volume (mm^3): ", fv.Volume)
+	fmt.Println("File Density: ", fc.Density)
 
 	json_data, _ := json.Marshal(struct {
-		Title  string  `json:"title"`
-		Mass   float64 `json:"mass"`
-		Volume float64 `json:"volume"`
+		Title   string  `json:"title"`
+		Density float64 `json:"density"`
 	}{
-		Title:  "output.json",
-		Mass:   fc.Mass,
-		Volume: fv.Volume,
+		Title:   "output.json",
+		Density: fc.Density,
 	})
 
 	output_file_path := "./output.json"
