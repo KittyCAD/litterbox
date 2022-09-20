@@ -24,6 +24,8 @@ jobs:
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
+          - ./samples/convert_file
+          - ./samples/file_mass
 
     steps:
       - uses: actions/checkout@v3
@@ -55,6 +57,8 @@ jobs:
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
+          - ./samples/convert_file
+          - ./samples/file_mass
 
     steps:
       - uses: actions/checkout@v3
@@ -75,14 +79,6 @@ jobs:
           python $FILE
         env:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-
-
-  # test-setup:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: remove previous outputs
-  #       shell: bash
-  #       run: rm -rf tutorials/**/*output.{stl,step}
 
   commit-script-outputs:
     # Using the python script to commit the output of the scripts
@@ -109,7 +105,9 @@ jobs:
 
       - name: remove previous outputs
         shell: bash
-        run: rm -rf tutorials/**/*output.{stl,obj,step,json}
+        run: |
+          rm -rf tutorials/**/*output.{stl,obj,step,json}
+          rm -rf samples/**/*output.{stl,obj,step,json}
 
       - name: test outputs
         run: |
@@ -117,6 +115,8 @@ jobs:
           files=( "./tutorials/conversion_obj_step"
                   "./tutorials/conversion_obj_stl"
                   "./tutorials/get_mass_volume"
+                  "./samples/convert_file"
+                  "./samples/file_mass"
           )
           for FILE in "${files[@]}"
           do
@@ -144,7 +144,9 @@ jobs:
 
 
       - name: stage outputs
-        run: git add "tutorials/**/*output.*"
+        run: |
+          git add "tutorials/**/*output.*"
+          git add "samples/**/*output.*"
 
       - name: git status
         run: git status
