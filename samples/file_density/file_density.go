@@ -26,11 +26,11 @@ func main() {
 	fmt.Println("File Density: ", fc.Density)
 
 	json_data, _ := json.Marshal(struct {
-		Title string  `json:"title"`
-		Density  float64 `json:"density"`
+		Title   string  `json:"title"`
+		Density float64 `json:"density"`
 	}{
-		Title: "output.json",
-		Density:  fc.Density,
+		Title:   "output.json",
+		Density: fc.Density,
 	})
 
 	output_file_path := "./output.json"
