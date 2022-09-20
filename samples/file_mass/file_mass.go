@@ -33,11 +33,11 @@ func main() {
 	fmt.Println("File mass (g): ", fc.Mass)
 
 	json_data, _ := json.Marshal(struct {
-		Title  string  `json:"title"`
-		Mass   float64 `json:"mass"`
+		Title string  `json:"title"`
+		Mass  float64 `json:"mass"`
 	}{
-		Title:  "output.json",
-		Mass:   fc.Mass,
+		Title: "output.json",
+		Mass:  fc.Mass,
 	})
 
 	output_file_path := "./output.json"
