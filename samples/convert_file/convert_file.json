@@ -9,11 +9,11 @@
     "files": [
       {
         "extension": "go",
-        "range": [13, 17]
+        "range": [18, 17]
       },
       {
         "extension": "py",
-        "range": [16, 6]
+        "range": [13, 6]
       }
     ]
   }
