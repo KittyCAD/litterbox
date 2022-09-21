@@ -23,11 +23,11 @@ func main() {
 	fmt.Println("File volume: ", fc.Volume)
 
 	json_data, _ := json.Marshal(struct {
-		Title string  `json:"title"`
-		Volume  float64 `json:"volume"`
+		Title  string  `json:"title"`
+		Volume float64 `json:"volume"`
 	}{
-		Title: "output.json",
-		Volume:  fc.Volume,
+		Title:  "output.json",
+		Volume: fc.Volume,
 	})
 
 	output_file_path := "./output.json"
