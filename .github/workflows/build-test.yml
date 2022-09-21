@@ -26,6 +26,7 @@ jobs:
           - ./tutorials/get_mass_volume
           - ./samples/convert_file
           - ./samples/file_mass
+          - ./samples/file_volume
 
     steps:
       - uses: actions/checkout@v3
@@ -56,6 +57,7 @@ jobs:
           - ./tutorials/get_mass_volume
           - ./samples/convert_file
           - ./samples/file_mass
+          - ./samples/file_volume
 
     steps:
       - uses: actions/checkout@v3
@@ -117,6 +119,7 @@ jobs:
                   "./tutorials/get_mass_volume"
                   "./samples/convert_file"
                   "./samples/file_mass"
+                  "./samples/file_volume"
           )
           for FILE in "${files[@]}"
           do
