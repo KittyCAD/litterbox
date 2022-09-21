@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"encoding/base64"
 	"fmt"
 	"github.com/kittycad/kittycad.go"
+	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -15,10 +18,15 @@ func main() {
 		panic(err)
 	}
 
-	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
+	input, _ := os.Open("./ORIGINALVOXEL-3.obj")
+
+	content, _ := ioutil.ReadAll(bufio.NewReader(input))
+
+	// Encode as base64.
+	myReader := strings.NewReader(base64.StdEncoding.EncodeToString(content))
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	fc, err := client.File.CreateConversion("stl", "obj", fileBytes)
+	fc, err := client.File.CreateConversion("stl", "obj", myReader)
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +34,7 @@ func main() {
 	fmt.Println("File conversion id: ", fc.ID)
 	fmt.Println("File conversion status: ", fc.Status)
 
-	decoded, err := base64.StdEncoding.DecodeString(fc.Output.String())
+	decoded, err := base64.StdEncoding.DecodeString(fc.Output)
 	if err != nil {
 		panic(err)
 	}
