@@ -2,22 +2,22 @@
     "name": "title",
     "outputs": [
       {
-          "path": "samples/file_density/output.json",
+          "path": "samples/file_mass/output.json",
           "format": "json"
       },
       {
-          "path": "samples/file_density/output.obj",
+          "path": "samples/file_mass/output.obj",
           "format": "obj"
       }
     ],
     "files": [
       {
         "extension": "go",
-        "range": [14, 10]
+        "range": [12, 10]
       },
       {
         "extension": "py",
-        "range": [15, 5]
+        "range": [13, 5]
       }
     ]
   }
