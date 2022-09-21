@@ -1,11 +1,15 @@
 package main
 
 import (
+	"bufio"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/kittycad/kittycad.go"
+	"io/ioutil"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func main() {
@@ -13,12 +17,17 @@ func main() {
 	// KITTYCAD_API_TOKEN.
 	client, _ := kittycad.NewClientFromEnv("your apps user agent")
 
-	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
+	input, _ := os.Open("./ORIGINALVOXEL-3.obj")
+
+	content, _ := ioutil.ReadAll(bufio.NewReader(input))
+
+	// Encode as base64.
+	myReader := strings.NewReader(base64.StdEncoding.EncodeToString(content))
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
 	fc, _ := client.File.CreateVolume(
 		"obj",
-		fileBytes,
+		myReader,
 	)
 
 	fmt.Println("File volume: ", fc.Volume)
