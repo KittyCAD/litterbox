@@ -16,19 +16,22 @@ func main() {
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	fc, _ := client.File.CreateVolume(
+	densitySteelGramsPerCubicMillimeter := 0.00784
+
+	fc, _ := client.File.CreateDensity(
+		densitySteelGramsPerCubicMillimeter,
 		"obj",
 		fileBytes,
 	)
 
-	fmt.Println("File volume: ", fc.Volume)
+	fmt.Println("File Density: ", fc.Density)
 
 	json_data, _ := json.Marshal(struct {
-		Title  string  `json:"title"`
-		Volume float64 `json:"volume"`
+		Title   string  `json:"title"`
+		Density float64 `json:"density"`
 	}{
-		Title:  "output.json",
-		Volume: fc.Volume,
+		Title:   "output.json",
+		Density: fc.Density,
 	})
 
 	// LITTERBOX-START-NON-EDITABLE-SECTION
