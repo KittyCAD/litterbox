@@ -25,6 +25,7 @@ jobs:
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
           - ./samples/convert_file
+          - ./samples/file_density
           - ./samples/file_mass
           - ./samples/file_volume
 
@@ -56,6 +57,7 @@ jobs:
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
           - ./samples/convert_file
+          - ./samples/file_density
           - ./samples/file_mass
           - ./samples/file_volume
 
@@ -118,6 +120,7 @@ jobs:
                   "./tutorials/conversion_obj_stl"
                   "./tutorials/get_mass_volume"
                   "./samples/convert_file"
+                  "./samples/file_density"
                   "./samples/file_mass"
                   "./samples/file_volume"
           )
