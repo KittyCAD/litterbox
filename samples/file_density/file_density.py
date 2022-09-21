@@ -11,6 +11,7 @@ client = ClientFromEnv()
 
 # Read in the contents of the file.
 file = open("./ORIGINALVOXEL-3.obj", "rb")
+# LITTERBOX-END-NON-EDITABLE-SECTION
 content = file.read()
 file.close()
 
@@ -27,6 +28,7 @@ partInfo = {
     "density": fm.density,
 }
 
+# LITTERBOX-START-NON-EDITABLE-SECTION
 with open('output.json', 'w', encoding='utf-8') as f:
     json.dump(partInfo, f, ensure_ascii=False, indent=4)
 os.system("cp ./ORIGINALVOXEL-3.obj ./output.obj")

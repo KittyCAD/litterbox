@@ -8,12 +8,10 @@
     ],
     "files": [
       {
-        "extension": "go",
-        "range": [18, 17]
+        "extension": "go"
       },
       {
-        "extension": "py",
-        "range": [13, 6]
+        "extension": "py"
       }
     ]
   }

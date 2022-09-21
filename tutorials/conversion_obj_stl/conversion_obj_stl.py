@@ -11,6 +11,7 @@ client = ClientFromEnv()
 # Convert a file from OBJ to STL.
 # Read in the contents of the file.
 file = open("./ORIGINALVOXEL-3.obj", "rb")
+# LITTERBOX-END-NON-EDITABLE-SECTION
 content = file.read()
 file.close()
 
@@ -23,6 +24,7 @@ fc: file_conversion.FileConversion = create_file_conversion_with_base64_helper.s
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")
 
+# LITTERBOX-START-NON-EDITABLE-SECTION
 output_file_path = "./output.stl"
 print(f"Saving output to {output_file_path}")
 output_file = open(output_file_path, "wb")

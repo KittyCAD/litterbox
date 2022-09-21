@@ -14,6 +14,7 @@ func main() {
 	client, _ := kittycad.NewClientFromEnv("your apps user agent")
 
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
+	// LITTERBOX-END-NON-EDITABLE-SECTION
 
 	fc, _ := client.File.CreateVolume(
 		"obj",
@@ -30,6 +31,7 @@ func main() {
 		Volume: fc.Volume,
 	})
 
+	// LITTERBOX-START-NON-EDITABLE-SECTION
 	output_file_path := "./output.json"
 	output, _ := os.Create(output_file_path)
 	defer output.Close()
