@@ -16,6 +16,7 @@ func main() {
 	}
 
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
+	// LITTERBOX-END-NON-EDITABLE-SECTION
 
 	fc, err := client.File.CreateConversion("stl", "obj", fileBytes)
 	if err != nil {
@@ -30,6 +31,7 @@ func main() {
 		panic(err)
 	}
 
+	// LITTERBOX-START-NON-EDITABLE-SECTION
 	output_file_path := "./output.stl"
 	fmt.Println("Saving output to ", output_file_path)
 
