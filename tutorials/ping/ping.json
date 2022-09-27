@@ -1,0 +1,15 @@
+{
+    "name": "title",
+    "outputs": [
+      {
+          "path": "tutorials/ping/output.stl",
+          "format": "stl"
+      }
+    ],
+    "files": [
+      {
+        "extension": "py"
+      }
+    ]
+  }
+  

@@ -1,0 +1,15 @@
+{
+    "name": "title",
+    "outputs": [
+      {
+          "path": "tutorials/getting_started/output.stl",
+          "format": "stl"
+      }
+    ],
+    "files": [
+      {
+        "extension": "py"
+      }
+    ]
+  }
+  
