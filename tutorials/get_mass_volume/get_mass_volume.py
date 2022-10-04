@@ -17,15 +17,13 @@ content = file.read()
 file.close()
 
 steelDensityPerCubicMillimeter = 0.00785
-fm = create_file_mass.sync(
-    client=client,
-    material_density=steelDensityPerCubicMillimeter,
-    src_format=File3DImportFormat.OBJ,
-    body=content)
-fv = create_file_volume.sync(
-    client=client,
-    src_format=File3DImportFormat.OBJ,
-    body=content)
+fm = create_file_mass.sync(client=client,
+                           material_density=steelDensityPerCubicMillimeter,
+                           src_format=File3DImportFormat.OBJ,
+                           body=content)
+fv = create_file_volume.sync(client=client,
+                             src_format=File3DImportFormat.OBJ,
+                             body=content)
 
 if isinstance(fm, Error) or fm == None:
     raise Exception("There was a problem with mass calculation")

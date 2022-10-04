@@ -16,11 +16,10 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fm = create_file_density.sync(
-    client=client,
-    material_mass=123,
-    src_format=File3DImportFormat.OBJ,
-    body=content)
+fm = create_file_density.sync(client=client,
+                              material_mass=123,
+                              src_format=File3DImportFormat.OBJ,
+                              body=content)
 
 if isinstance(fm, Error) or fm == None:
     raise Exception("There was a problem")

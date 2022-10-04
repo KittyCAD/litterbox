@@ -5,7 +5,6 @@ from kittycad.models.file_import_format import FileImportFormat
 from kittycad.models.error import Error
 from kittycad.api.file import create_file_conversion_with_base64_helper
 
-
 # Create a new client with your token parsed from the environment variable:
 #   KITTYCAD_API_TOKEN.
 client = ClientFromEnv(timeout=500, verify_ssl=True)
