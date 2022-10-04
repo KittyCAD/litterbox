@@ -23,11 +23,8 @@ fc = create_file_conversion_with_base64_helper.sync(
     src_format=FileImportFormat.OBJ,
     body=content)
 
-if isinstance(fc, Error):
-    print(fc)
-    raise Exception(fc.error_code)
-elif fc == None:
-    raise Exception("isNone")
+if isinstance(fc, Error) or fc == None:
+    raise Exception("There was a problem")
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")

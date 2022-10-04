@@ -22,11 +22,8 @@ fm = create_file_density.sync(
     src_format=File3DImportFormat.OBJ,
     body=content)
 
-if isinstance(fm, Error):
-    print(fm)
-    raise Exception(fm.error_code)
-elif fm == None:
-    raise Exception("isNone")
+if isinstance(fm, Error) or fm == None:
+    raise Exception("There was a problem")
 
 print(f"File density: {fm.density}")
 
