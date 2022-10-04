@@ -1,6 +1,5 @@
 from kittycad.client import ClientFromEnv
-from kittycad.models import Pong
 from kittycad.api.meta import ping
 
-pong: Pong = ping.sync(client=ClientFromEnv())
+pong = ping.sync(client=ClientFromEnv(timeout=500, verify_ssl=True))
 print(pong)

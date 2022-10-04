@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 from kittycad.client import ClientFromEnv
-from kittycad.models import file_output_format, file_source_format, file_conversion
+from kittycad.models.file_export_format import FileExportFormat
+from kittycad.models.file_import_format import FileImportFormat
+from kittycad.models.error import Error
 from kittycad.api.file import create_file_conversion_with_base64_helper
-import json
 
 # Create a new client with your token parsed from the environment variable:
 #   KITTYCAD_API_TOKEN.
-client = ClientFromEnv()
+client = ClientFromEnv(timeout=500, verify_ssl=True)
 
 # Convert a file from OBJ to STL.
 # Read in the contents of the file.
@@ -15,11 +16,14 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fc: file_conversion.FileConversion = create_file_conversion_with_base64_helper.sync(
+fc = create_file_conversion_with_base64_helper.sync(
     client=client,
     body=content,
-    src_format=file_source_format.FileSourceFormat.OBJ,
-    output_format=file_output_format.FileOutputFormat.STL)
+    src_format=FileImportFormat.OBJ,
+    output_format=FileExportFormat.STL)
+
+if isinstance(fc, Error) or fc == None:
+    raise Exception("There was a problem")
 
 print(f"File conversion id: {fc.id}")
 # Try adding your name by changing the text below to
