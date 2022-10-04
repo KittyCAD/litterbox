@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 from kittycad.client import ClientFromEnv
-from kittycad.models import file_source_format, FileDensity
+from kittycad.models.file3_d_import_format import File3DImportFormat
 from kittycad.api.file import create_file_density
+from kittycad.models.error import Error
 import json
 import os
 
 # Create a new client with your token parsed from the environment variable:
 #   KITTYCAD_API_TOKEN.
-client = ClientFromEnv()
+client = ClientFromEnv(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.
 file = open("./ORIGINALVOXEL-3.obj", "rb")
@@ -15,11 +16,17 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fm: FileDensity = create_file_density.sync(
+fm = create_file_density.sync(
     client=client,
     material_mass=123,
-    src_format=file_source_format.FileSourceFormat.OBJ,
+    src_format=File3DImportFormat.OBJ,
     body=content)
+
+if isinstance(fm, Error):
+    print(fm)
+    raise Exception(fm.error_code)
+elif fm == None:
+    raise Exception("isNone")
 
 print(f"File density: {fm.density}")
 
