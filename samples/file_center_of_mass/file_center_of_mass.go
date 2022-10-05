@@ -30,11 +30,11 @@ func main() {
 	fmt.Println("File center of mass: ", fc.CenterOfMass)
 
 	json_data, _ := json.Marshal(struct {
-		Title string  `json:"title"`
+		Title        string    `json:"title"`
 		CenterOfMass []float64 `json:"center_of_mass"`
 	}{
-		Title: "output.json",
-		CenterOfMass:  fc.CenterOfMass,
+		Title:        "output.json",
+		CenterOfMass: fc.CenterOfMass,
 	})
 
 	// LITTERBOX-START-NON-EDITABLE-SECTION
