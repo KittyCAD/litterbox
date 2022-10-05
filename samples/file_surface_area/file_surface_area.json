@@ -1,0 +1,22 @@
+{
+    "name": "title",
+    "outputs": [
+      {
+          "path": "samples/file_surface_area/output.json",
+          "format": "json"
+      },
+      {
+          "path": "samples/file_surface_area/output.obj",
+          "format": "obj"
+      }
+    ],
+    "files": [
+      {
+        "extension": "go"
+      },
+      {
+        "extension": "py"
+      }
+    ]
+  }
+  
