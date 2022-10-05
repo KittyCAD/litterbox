@@ -28,6 +28,7 @@ jobs:
           - ./samples/file_density
           - ./samples/file_mass
           - ./samples/file_volume
+          - ./samples/file_center_of_mass
           - ./samples/file_surface_area
 
     steps:
