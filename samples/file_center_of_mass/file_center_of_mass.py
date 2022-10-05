@@ -17,9 +17,9 @@ content = file.read()
 file.close()
 
 fm = create_file_center_of_mass.sync(client=client,
-                              material_density=123,
-                              src_format=File3DImportFormat.OBJ,
-                              body=content)
+                                     material_density=123,
+                                     src_format=File3DImportFormat.OBJ,
+                                     body=content)
 
 if isinstance(fm, Error) or fm == None:
     raise Exception("There was a problem")

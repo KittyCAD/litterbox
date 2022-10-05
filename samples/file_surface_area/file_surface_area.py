@@ -17,8 +17,8 @@ content = file.read()
 file.close()
 
 fm = create_file_surface_area.sync(client=client,
-                              src_format=File3DImportFormat.OBJ,
-                              body=content)
+                                   src_format=File3DImportFormat.OBJ,
+                                   body=content)
 
 if isinstance(fm, Error) or fm == None:
     raise Exception("There was a problem")
