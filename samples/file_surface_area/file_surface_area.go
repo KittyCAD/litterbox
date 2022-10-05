@@ -24,11 +24,11 @@ func main() {
 	fmt.Println("File surface area: ", fc.SurfaceArea)
 
 	json_data, _ := json.Marshal(struct {
-		Title string  `json:"title"`
+		Title       string  `json:"title"`
 		SurfaceArea float64 `json:"surface_area"`
 	}{
-		Title: "output.json",
-		SurfaceArea:  fc.SurfaceArea,
+		Title:       "output.json",
+		SurfaceArea: fc.SurfaceArea,
 	})
 
 	// LITTERBOX-START-NON-EDITABLE-SECTION
