@@ -26,7 +26,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Print(fc)
+
 	fmt.Println("File center of mass: ", fc.CenterOfMass)
 
 	json_data, _ := json.Marshal(struct {
