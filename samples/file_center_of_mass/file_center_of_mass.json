@@ -1,0 +1,19 @@
+{
+    "name": "title",
+    "outputs": [
+      {
+          "path": "samples/file_center_of_mass/output.json",
+          "format": "json"
+      },
+      {
+          "path": "samples/file_center_of_mass/output.obj",
+          "format": "obj"
+      }
+    ],
+    "files": [
+      {
+        "extension": "py"
+      }
+    ]
+  }
+  

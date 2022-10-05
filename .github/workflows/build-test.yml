@@ -28,6 +28,7 @@ jobs:
           - ./samples/file_density
           - ./samples/file_mass
           - ./samples/file_volume
+          - ./samples/file_surface_area
 
     steps:
       - uses: actions/checkout@v3
@@ -61,6 +62,8 @@ jobs:
           - ./samples/file_density
           - ./samples/file_mass
           - ./samples/file_volume
+          - ./samples/file_center_of_mass
+          - ./samples/file_surface_area
 
     steps:
       - uses: actions/checkout@v3
@@ -125,6 +128,8 @@ jobs:
                   "./samples/file_density"
                   "./samples/file_mass"
                   "./samples/file_volume"
+                  "./samples/file_center_of_mass"
+                  "./samples/file_surface_area"
           )
           for FILE in "${files[@]}"
           do
