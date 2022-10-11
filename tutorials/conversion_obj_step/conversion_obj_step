@@ -1,0 +1,12 @@
+{
+    "name": "title",
+    "outputs": [],
+    "files": [
+        {
+            "extension": "go"
+        },
+        {
+            "extension": "py"
+        }
+    ]
+}
