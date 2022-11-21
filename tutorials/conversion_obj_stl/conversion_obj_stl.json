@@ -8,10 +8,10 @@
   ],
   "files": [
     {
-      "extension": "go"
+      "extension": "py"
     },
     {
-      "extension": "py"
+      "extension": "go"
     }
   ]
 }
