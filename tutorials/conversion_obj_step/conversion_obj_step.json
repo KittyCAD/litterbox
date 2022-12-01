@@ -1,5 +1,8 @@
 {
     "name": "title",
+    "tags": [
+        "convert"
+    ],
     "outputs": [],
     "files": [
         {

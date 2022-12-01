@@ -1,5 +1,8 @@
 {
   "name": "title",
+  "tags": [
+    "metadata"  
+  ],
   "outputs": [
     {
         "path": "tutorials/get_mass_volume/output.json",

@@ -1,5 +1,8 @@
 {
     "name": "convert file",
+    "tags": [
+      "convert"
+    ],
     "outputs": [
       {
           "path": "samples/convert_file/output.stl",

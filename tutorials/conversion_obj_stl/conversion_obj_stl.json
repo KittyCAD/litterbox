@@ -1,9 +1,12 @@
 {
   "name": "title",
+  "tags": [
+    "convert"
+  ],
   "outputs": [
     {
-        "path": "tutorials/conversion_obj_stl/output.stl",
-        "format": "stl"
+      "path": "tutorials/conversion_obj_stl/output.stl",
+      "format": "stl"
     }
   ],
   "files": [
