@@ -13,7 +13,7 @@ func main() {
 	// KITTYCAD_API_TOKEN.
 	client, _ := kittycad.NewClientFromEnv("your apps user agent")
 
-	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
+	fileBytes, _ := os.ReadFile("./seesaw.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
 	densitySteelGramsPerCubicMillimeter := 0.00784
@@ -45,5 +45,5 @@ func main() {
 	if err := output.Sync(); err != nil {
 		panic(err)
 	}
-	exec.Command("cp", "./ORIGINALVOXEL-3.obj", "./output.obj").Output()
+	exec.Command("cp", "./seesaw.obj", "./output.obj").Output()
 }
