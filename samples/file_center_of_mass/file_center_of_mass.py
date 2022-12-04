@@ -11,7 +11,7 @@ import os
 client = ClientFromEnv(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.
-file = open("./ORIGINALVOXEL-3.obj", "rb")
+file = open("./seesaw.obj", "rb")
 # LITTERBOX-END-NON-EDITABLE-SECTION
 content = file.read()
 file.close()
@@ -34,4 +34,4 @@ partInfo = {
 # LITTERBOX-START-NON-EDITABLE-SECTION
 with open('output.json', 'w', encoding='utf-8') as f:
     json.dump(partInfo, f, ensure_ascii=False, indent=4)
-os.system("cp ./ORIGINALVOXEL-3.obj ./output.obj")
+os.system("cp ./seesaw.obj ./output.obj")
