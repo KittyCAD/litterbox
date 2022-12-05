@@ -22,7 +22,7 @@ fm = create_file_center_of_mass.sync(client=client,
                                      body=content)
 
 if isinstance(fm, Error) or fm == None:
-    raise Exception("There was a problem.")
+    raise Exception("There was a problem")
 
 print(f"File center of mass: {fm.center_of_mass}")
 
