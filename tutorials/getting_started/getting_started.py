@@ -27,7 +27,7 @@ if isinstance(fc, Error) or fc == None:
 
 print(f"File conversion id: {fc.id}")
 # Try adding your name by changing the text below to
-# "print(<your-name>, congrats! Your STL conversion was successful):"
+# print("<your-name>, congrats! Your STL conversion was successful:")
 print(f"File conversion status: {fc.status}")
 
 # LITTERBOX-START-NON-EDITABLE-SECTION
