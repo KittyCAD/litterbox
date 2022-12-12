@@ -88,6 +88,38 @@ jobs:
         env:
           KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
+  build-test-js-versions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 18]
+        test-path: 
+          - ./samples/convert_file
+          - ./samples/file_density
+          - ./samples/file_mass
+          - ./samples/file_volume
+          - ./samples/file_center_of_mass
+          - ./samples/file_surface_area
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Set up node ${{ matrix.python-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'yarn'
+      - run: yarn install
+
+      - name: Run scripts
+        shell: bash
+        run: |
+          FILE=$(find ${{ matrix.test-path }} -name "*.js")
+          node $FILE
+        env:
+          KITTYCAD_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+
   commit-script-outputs:
     # Using the python script to commit the output of the scripts
     # The go scripts should have the same output

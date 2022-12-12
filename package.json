@@ -1,0 +1,13 @@
+{
+  "name": "litterbox",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "litterbox examples and tutorials",
+  "main": "",
+  "repository": "git@github.com:KittyCAD/litterbox.git",
+  "author": "KittyCAD",
+  "license": "",
+  "dependencies": {
+    "@kittycad/lib": "^0.0.18"
+  }
+}
