@@ -4,11 +4,15 @@ on:
     branches: main
     paths:
       - '**.py'
+      - '**.go'
+      - 'ORIGINALVOXEL-3.obj'
       - .github/workflows/build-test.yml
       - requirements.txt
   pull_request:
     paths:
       - '**.py'
+      - '**.go'
+      - 'ORIGINALVOXEL-3.obj'
       - .github/workflows/build-test.yml
       - requirements.txt
   workflow_dispatch:
