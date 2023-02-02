@@ -52,6 +52,26 @@ async function main() {
     await convertToViewable(beforePath)
     await downloadFile(octokit, owner, repo, afterCommit, filename, afterPath)
     await convertToViewable(afterPath)
+
+    // Get data from a Pull Request
+    const pull = 95
+    const supportedSrcFormats = new Set([
+        "dae",
+        "dxf",
+        "fbx",
+        "obj_zip",
+        "obj",
+        "obj_nomtl",
+        "ply",
+        "step",
+        "stl",
+    ]);
+
+    const filesResponse = await octokit.rest.pulls.listFiles({ owner, repo, pull_number: pull })
+    const changedFiles = filesResponse.data
+    console.log(`PR #${pull} has ${changedFiles.length} changed files`)
+    const supportedChangedFiles = changedFiles.filter(f => supportedSrcFormats.has(f.filename.split('.').pop()))
+    console.log(`PR #${pull} has ${supportedChangedFiles.length} changed supported CAD files`)
 }
 
 main()
