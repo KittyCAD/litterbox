@@ -53,26 +53,32 @@ async function getDiff(octokit, owner, repo, changedFiles, sha, parentSha, desti
         "stl",
     ]);
 
-    const supportedChangedFiles = changedFiles.filter(f => supportedSrcFormats.has(f.filename.split('.').pop()))
-    console.log(`Diff has ${changedFiles.length} changed files and ${supportedChangedFiles.length} changed supported CAD files`)
-    for (const file of supportedChangedFiles) {
-        const filename = file.filename
+    for (const file of changedFiles) {
+        const { filename, status } = file
         const extension = filename.split(".").pop()
+        if (!supportedSrcFormats.has(extension)) {
+            continue;
+        }
+
+        // Supporting nested files
         const beforeFilePath = path.join(beforeDir, filename)
         await fsp.mkdir(path.join(beforeFilePath, ".."), { recursive: true })
         const afterFilePath = path.join(afterDir, filename)
         await fsp.mkdir(path.join(afterFilePath, ".."), { recursive: true })
-        if (file.status == "modified") {
+
+        if (status == "modified") {
             await downloadFile(octokit, owner, repo, parentSha, filename, beforeFilePath)
             await makeViewable(beforeFilePath, extension)
             await downloadFile(octokit, owner, repo, sha, filename, afterFilePath)
             await makeViewable(afterFilePath, extension)
-        } else if (file.status == "added") {
+        } else if (status == "added") {
             await downloadFile(octokit, owner, repo, sha, filename, afterFilePath)
             await makeViewable(afterFilePath, extension)
+        } else if (status == "removed") {
+            await downloadFile(octokit, owner, repo, parentSha, filename, beforeFilePath)
+            await makeViewable(beforeFilePath, extension)
         } else {
-            await downloadFile(octokit, owner, repo, parentSha, filename, beforeFilePath)
-            await makeViewable(beforeFilePath, extension)
+            console.error(`Unsupported file status (${status}), skipping.`)
         }
     }
 }
