@@ -5,6 +5,7 @@ import { file } from '@kittycad/lib'
 import { Octokit } from "@octokit/rest"
 import fetch from "node-fetch"
 import util from "util"
+import path from "path"
 import { pipeline } from "stream"
 const streamPipeline = util.promisify(pipeline)
 
@@ -19,42 +20,27 @@ async function downloadFile(octokit, owner, repo, ref, path, destination) {
     await streamPipeline(response.body, fs.createWriteStream(destination))
 }
 
-async function convertToViewable(source, viewableFormat = "stl") {
+async function makeViewable(source, srcFormat, outputFormat = "stl") {
     const body = await fsp.readFile(source, 'base64')
-    
+
     const response = await file.create_file_conversion({
-        output_format: viewableFormat,
-        src_format: 'obj',
+        output_format: outputFormat,
+        src_format: srcFormat,
         body,
     })
-    if ('error_code' in response) throw response
+    if ('error_code' in response) console.log(response)
     const { status, id, output } = response
     console.log(`File conversion id: ${id}`)
     console.log(`File conversion status: ${status}`)
-    
-    await fsp.writeFile(`${source}.${viewableFormat}`, output, 'base64')
+
+    await fsp.writeFile(source, output, 'base64')
 }
 
-async function main() {
-    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-    const { data: { login } } = await octokit.rest.users.getAuthenticated();
-    console.log(`Hello, @${login}`);
-
-    const owner = "KittyCAD"
-    const repo = "litterbox"
-    const beforeCommit = "ab5d712acd156741f020c7b242c29189ae9bcf9e"
-    const afterCommit = "4ddf899550addf41d6bf1b790ce79e46501411b3"
-    const filename = "seesaw.obj"
-    const beforePath = "seesaw_diff_before.obj"
-    const afterPath = "seesaw_diff_after.obj"
-
-    await downloadFile(octokit, owner, repo, beforeCommit, filename, beforePath)
-    await convertToViewable(beforePath)
-    await downloadFile(octokit, owner, repo, afterCommit, filename, afterPath)
-    await convertToViewable(afterPath)
-
-    // Get data from a Pull Request
-    const pull = 95
+async function getDiff(octokit, owner, repo, changedFiles, sha, parentSha, destination) {
+    const beforeDir = path.join(destination, "before")
+    const afterDir = path.join(destination, "after")
+    await fsp.mkdir(beforeDir, { recursive: true })
+    await fsp.mkdir(afterDir, { recursive: true })
     const supportedSrcFormats = new Set([
         "dae",
         "dxf",
@@ -67,11 +53,52 @@ async function main() {
         "stl",
     ]);
 
-    const filesResponse = await octokit.rest.pulls.listFiles({ owner, repo, pull_number: pull })
-    const changedFiles = filesResponse.data
-    console.log(`PR #${pull} has ${changedFiles.length} changed files`)
     const supportedChangedFiles = changedFiles.filter(f => supportedSrcFormats.has(f.filename.split('.').pop()))
-    console.log(`PR #${pull} has ${supportedChangedFiles.length} changed supported CAD files`)
+    console.log(`Diff has ${changedFiles.length} changed files and ${supportedChangedFiles.length} changed supported CAD files`)
+    for (const file of supportedChangedFiles) {
+        const filename = file.filename
+        const extension = filename.split(".").pop()
+        const beforeFilePath = path.join(beforeDir, filename)
+        await fsp.mkdir(path.join(beforeFilePath, ".."), { recursive: true })
+        const afterFilePath = path.join(afterDir, filename)
+        await fsp.mkdir(path.join(afterFilePath, ".."), { recursive: true })
+        if (file.status == "modified") {
+            await downloadFile(octokit, owner, repo, parentSha, filename, beforeFilePath)
+            await makeViewable(beforeFilePath, extension)
+            await downloadFile(octokit, owner, repo, sha, filename, afterFilePath)
+            await makeViewable(afterFilePath, extension)
+        } else if (file.status == "added") {
+            await downloadFile(octokit, owner, repo, sha, filename, afterFilePath)
+            await makeViewable(afterFilePath, extension)
+        } else {
+            await downloadFile(octokit, owner, repo, parentSha, filename, beforeFilePath)
+            await makeViewable(beforeFilePath, extension)
+        }
+    }
+}
+
+async function main() {
+    const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+    const { data: { login } } = await octokit.rest.users.getAuthenticated();
+    console.log(`Hello, @${login}`);
+
+    const owner = "KittyCAD"
+    const repo = "litterbox"
+
+    // Get files from a Pull Request
+    const pullNumber = 95
+    const pull = await octokit.rest.pulls.get({ owner, repo, pull_number: pullNumber })
+    let changedFiles = (await octokit.rest.pulls.listFiles({ owner, repo, pull_number: pullNumber })).data
+    let sha = pull.data.head.sha
+    let parentSha = pull.data.base.sha
+    await getDiff(octokit, owner, repo, changedFiles, sha, parentSha, `diff/#${pullNumber}`)
+
+    // Get files from a commit
+    sha = "b697e3fc1c7f1be203ceb37928adbe423ffa25ac"
+    const commit = await octokit.rest.repos.getCommit({ owner, repo, ref: sha })
+    changedFiles = commit.data.files || []
+    parentSha = commit.data.parents[0].sha
+    await getDiff(octokit, owner, repo, changedFiles, sha, parentSha, `diff/${sha}`)
 }
 
 main()
