@@ -3,6 +3,10 @@
     "tags": [
       "metadata"
     ],
+    "seo": {
+      "title": "File Center of Mass Sample",
+      "description": "A live editable sample of how to get the center of mass of a 3D model using the KittyCAD API."
+    },
     "outputs": [
       {
           "path": "samples/file_center_of_mass/output.json",

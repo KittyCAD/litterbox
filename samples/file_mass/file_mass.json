@@ -3,6 +3,10 @@
     "tags": [
       "metadata"
     ],
+    "seo": {
+      "title": "File Mass Sample",
+      "description": "A live editable sample of how to get the mass of a 3D model using the KittyCAD API."
+    },
     "outputs": [
       {
           "path": "samples/file_mass/output.json",

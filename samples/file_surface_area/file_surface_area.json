@@ -3,6 +3,10 @@
     "tags": [
       "metadata"
     ],
+    "seo": {
+      "title": "File Surface Area Sample",
+      "description": "A live editable sample of how to get the surface area of a 3D model using the KittyCAD API."
+    },
     "outputs": [
       {
           "path": "samples/file_surface_area/output.json",
