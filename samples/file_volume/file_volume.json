@@ -3,6 +3,10 @@
     "tags": [
       "metadata"
     ],
+    "seo": {
+      "title": "File Volume Sample",
+      "description": "A live editable sample of how to get the volume of a 3D model using the KittyCAD API."
+    },
     "outputs": [
       {
           "path": "samples/file_volume/output.json",

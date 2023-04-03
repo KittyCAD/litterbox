@@ -3,6 +3,10 @@
     "tags": [
       "metadata"
     ],
+    "seo": {
+      "title": "File Density Sample",
+      "description": "A live editable sample of how to get the density of a 3D model using the KittyCAD API."
+    },
     "outputs": [
       {
           "path": "samples/file_density/output.json",

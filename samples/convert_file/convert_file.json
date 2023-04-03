@@ -3,6 +3,10 @@
     "tags": [
       "convert"
     ],
+    "seo": {
+      "title": "Convert File Sample",
+      "description": "A live editable sample of how to convert a file from one format to another using the KittyCAD API."
+    },
     "outputs": [
       {
           "path": "samples/convert_file/output.stl",
