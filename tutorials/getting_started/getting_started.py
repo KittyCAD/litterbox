@@ -19,7 +19,7 @@ file.close()
 fc = create_file_conversion_with_base64_helper.sync(
     client=client,
     body=content,
-    src_format=FileImportFormat.OBJ_NOMTL,
+    src_format=FileImportFormat.OBJ,
     output_format=FileExportFormat.STL)
 
 if isinstance(fc, Error) or fc == None:
