@@ -30,5 +30,5 @@ print(f"File conversion status: {fc.status}")
 output_file_path = "./output.step"
 print(f"Saving output to {output_file_path}")
 output_file = open(output_file_path, "wb")
-output_file.write(fc.output)
+output_file.write(bytes(fc.output, encoding='utf8'))
 output_file.close()
