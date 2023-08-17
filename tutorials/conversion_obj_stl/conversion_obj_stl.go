@@ -19,7 +19,11 @@ func main() {
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	fc, err := client.File.CreateConversion(kittycad.FileExportFormatStl, kittycad.FileImportFormatObj, fileBytes)
+	fc, err := client.File.CreateConversion(
+		kittycad.FileExportFormatStl,
+		kittycad.FileImportFormatObj,
+		fileBytes,
+	)
 	if err != nil {
 		panic(err)
 	}

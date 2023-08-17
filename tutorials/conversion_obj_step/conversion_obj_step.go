@@ -18,7 +18,11 @@ func main() {
 
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 
-	fc, err := client.File.CreateConversion(kittycad.FileExportFormatStep, kittycad.FileImportFormatObj, fileBytes)
+	fc, err := client.File.CreateConversion(
+		kittycad.FileExportFormatStep,
+		kittycad.FileImportFormatObj,
+		fileBytes,
+	)
 	if err != nil {
 		panic(err)
 	}
