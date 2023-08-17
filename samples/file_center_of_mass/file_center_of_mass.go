@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
 	"os/exec"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -16,22 +17,20 @@ func main() {
 	fileBytes, _ := os.ReadFile("./seesaw.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	densitySteelGramsPerCubicMillimeter := 0.00784
-
 	fc, err := client.File.CreateCenterOfMass(
-		densitySteelGramsPerCubicMillimeter,
-		"obj",
+		kittycad.UnitLengthMm,
+		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("File center of mass: ", fc.CenterOfMass)
+	fmt.Println("File center of mass (mm): ", fc.CenterOfMass)
 
 	json_data, _ := json.Marshal(struct {
-		Title        string    `json:"title"`
-		CenterOfMass []float64 `json:"center_of_mass"`
+		Title        string           `json:"title"`
+		CenterOfMass kittycad.Point3D `json:"center_of_mass"`
 	}{
 		Title:        "output.json",
 		CenterOfMass: fc.CenterOfMass,

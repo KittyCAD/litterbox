@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
 	"os/exec"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -16,11 +17,14 @@ func main() {
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	densitySteelGramsPerCubicMillimeter := 0.00784
+	// We divide by 1e+9 here to convert from cubic millimeters to cubic meters.
+	densitySteelGramsPerCubicMeter := 0.00784 / 1e+9
 
 	fc, _ := client.File.CreateMass(
-		densitySteelGramsPerCubicMillimeter,
-		"obj",
+		densitySteelGramsPerCubicMeter,
+		kittycad.UnitDensityKgm3,
+		kittycad.UnitMasG,
+		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
 
