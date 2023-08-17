@@ -19,7 +19,10 @@ content = file.read()
 file.close()
 
 fm = create_file_center_of_mass.sync(
-    client=client, output_unit=UnitLength.M, src_format=FileImportFormat.OBJ, body=content
+    client=client,
+    output_unit=UnitLength.M,
+    src_format=FileImportFormat.OBJ,
+    body=content,
 )
 
 if isinstance(fm, Error) or fm is None:

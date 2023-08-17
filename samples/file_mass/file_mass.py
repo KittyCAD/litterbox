@@ -6,6 +6,7 @@ from kittycad.api.file import create_file_mass
 from kittycad.client import ClientFromEnv
 from kittycad.models.error import Error
 from kittycad.models.file_import_format import FileImportFormat
+from kittycad.models.FileMass import FileMass
 from kittycad.models.unit_density import UnitDensity
 from kittycad.models.unit_mass import UnitMass
 

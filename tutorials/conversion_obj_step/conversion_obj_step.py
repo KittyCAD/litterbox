@@ -2,6 +2,7 @@
 from kittycad.api.file import create_file_conversion_with_base64_helper
 from kittycad.client import ClientFromEnv
 from kittycad.models.error import Error
+from kittycad.models.file_conversion import FileConversion
 from kittycad.models.file_export_format import FileExportFormat
 from kittycad.models.file_import_format import FileImportFormat
 

@@ -6,6 +6,7 @@ from kittycad.api.file import create_file_surface_area
 from kittycad.client import ClientFromEnv
 from kittycad.models.error import Error
 from kittycad.models.file_import_format import FileImportFormat
+from kittycad.models.file_surface_area import FileSurfaceArea
 from kittycad.models.unit_area import UnitArea
 
 # Create a new client with your token parsed from the environment variable:
@@ -19,7 +20,10 @@ content = file.read()
 file.close()
 
 fm = create_file_surface_area.sync(
-    client=client,output_unit=UnitArea.M2, src_format=FileImportFormat.OBJ, body=content
+    client=client,
+    output_unit=UnitArea.M2,
+    src_format=FileImportFormat.OBJ,
+    body=content,
 )
 
 if isinstance(fm, Error) or fm is None:
