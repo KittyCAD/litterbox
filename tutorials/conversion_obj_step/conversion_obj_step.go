@@ -1,10 +1,10 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -17,18 +17,17 @@ func main() {
 
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 
-	fc, err := client.File.CreateConversion("step", "obj", fileBytes)
+	fc, err := client.File.CreateConversion(
+		kittycad.FileExportFormatStep,
+		kittycad.FileImportFormatObj,
+		fileBytes,
+	)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("File conversion id: ", fc.ID)
 	fmt.Println("File conversion status: ", fc.Status)
-
-	decoded, err := base64.StdEncoding.DecodeString(fc.Output.String())
-	if err != nil {
-		panic(err)
-	}
 
 	output_file_path := "./output.step"
 	fmt.Println("Saving output to ", output_file_path)
@@ -39,7 +38,7 @@ func main() {
 	}
 	defer output.Close()
 
-	if _, err := output.Write(decoded); err != nil {
+	if _, err := output.Write(fc.Output.Inner); err != nil {
 		panic(err)
 	}
 	if err := output.Sync(); err != nil {

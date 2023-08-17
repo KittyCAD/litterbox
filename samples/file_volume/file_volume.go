@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
 	"os/exec"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -17,11 +18,12 @@ func main() {
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
 	fc, _ := client.File.CreateVolume(
-		"obj",
+		kittycad.UnitVolumeM3,
+		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
 
-	fmt.Println("File volume: ", fc.Volume)
+	fmt.Println("File volume (m^3): ", fc.Volume)
 
 	json_data, _ := json.Marshal(struct {
 		Title  string  `json:"title"`

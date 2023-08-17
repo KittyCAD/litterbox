@@ -1,10 +1,10 @@
 package main
 
 import (
-	"encoding/base64"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -18,18 +18,16 @@ func main() {
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	fc, err := client.File.CreateConversion("stl", "obj", fileBytes)
+	fc, err := client.File.CreateConversion(
+		kittycad.FileExportFormatStl,
+		kittycad.FileImportFormatObj,
+		fileBytes)
 	if err != nil {
 		panic(err)
 	}
 
 	fmt.Println("File conversion id: ", fc.ID)
 	fmt.Println("File conversion status: ", fc.Status)
-
-	decoded, err := base64.StdEncoding.DecodeString(fc.Output.String())
-	if err != nil {
-		panic(err)
-	}
 
 	// LITTERBOX-START-NON-EDITABLE-SECTION
 	output_file_path := "./output.stl"
@@ -41,7 +39,7 @@ func main() {
 	}
 	defer output.Close()
 
-	if _, err := output.Write(decoded); err != nil {
+	if _, err := output.Write(fc.Output.Inner); err != nil {
 		panic(err)
 	}
 	if err := output.Sync(); err != nil {

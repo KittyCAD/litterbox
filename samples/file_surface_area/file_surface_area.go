@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
 	"os/exec"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -17,11 +18,12 @@ func main() {
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
 	fc, _ := client.File.CreateSurfaceArea(
-		"obj",
+		kittycad.UnitAreaM2,
+		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
 
-	fmt.Println("File surface area: ", fc.SurfaceArea)
+	fmt.Println("File surface area (m^2): ", fc.SurfaceArea)
 
 	json_data, _ := json.Marshal(struct {
 		Title       string  `json:"title"`

@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+
+from typing import Tuple
+
+from kittycad.api.file import create_file_conversion_with_base64_helper
 from kittycad.client import ClientFromEnv
+from kittycad.models.error import Error
+from kittycad.models.file_conversion import FileConversion
 from kittycad.models.file_export_format import FileExportFormat
 from kittycad.models.file_import_format import FileImportFormat
-from kittycad.models.error import Error
-from kittycad.api.file import create_file_conversion_with_base64_helper
 
 # Create a new client with your token parsed from the environment variable:
 #   KITTYCAD_API_TOKEN.
@@ -16,23 +20,30 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fc = create_file_conversion_with_base64_helper.sync(
+result = create_file_conversion_with_base64_helper.sync(
     client=client,
     body=content,
     src_format=FileImportFormat.OBJ,
-    output_format=FileExportFormat.STL)
+    output_format=FileExportFormat.STL,
+)
 
-if isinstance(fc, Error) or fc == None:
+if isinstance(result, Error) or result is None:
     raise Exception("There was a problem")
+
+r: Tuple[FileConversion, bytes] = result  # type: ignore
+
+# Get the bytes of the output file.
+b: bytes = r[1]
+fc: FileConversion = r[0]
 
 print(f"File conversion id: {fc.id}")
 # Try adding your name by changing the text below to
-#print("<your-name>, congrats! Your STL conversion was successful:")
+# print("<your-name>, congrats! Your STL conversion was successful:")
 print(f"File conversion status: {fc.status}")
 
 # LITTERBOX-START-NON-EDITABLE-SECTION
 output_file_path = "./output.stl"
 print(f"Saving output to {output_file_path}")
 output_file = open(output_file_path, "wb")
-output_file.write(fc.output)
+output_file.write(b)
 output_file.close()

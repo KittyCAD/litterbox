@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         go-version: [1.18]
-        test-path: 
+        test-path:
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
@@ -57,8 +57,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
-        test-path: 
+        python-version: [3.9]
+        test-path:
           - ./tutorials/conversion_obj_step
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
@@ -97,7 +97,7 @@ jobs:
     strategy:
       matrix:
         node: [16, 18]
-        test-path: 
+        test-path:
           - ./samples/convert_file
           - ./samples/file_density
           - ./samples/file_mass
@@ -175,13 +175,13 @@ jobs:
             mv output.* $FILE
             OUTPUT_FILE=$(find $FILE -name output.*)
             if [[ $OUTPUT_FILE == *.step ]]
-              # current date is added to step file, meaning there will always be a diff, clamping this to a consistent date to prevent this 
+              # current date is added to step file, meaning there will always be a diff, clamping this to a consistent date to prevent this
               then
                 sed -i 's/20..-..-..T..:..:../2022-00-00T00:00:00/g' $OUTPUT_FILE
             fi
             if [ $(find $FILE -maxdepth 2 -name 'output.*' -print -quit )  ]; then
                 echo "$FILE output was created."
-            else 
+            else
                 echo "better luck next time $FILE output was NOT created"
                 exit 1
             fi
@@ -200,7 +200,7 @@ jobs:
 
       - name: git status
         run: git status
-      
+
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)

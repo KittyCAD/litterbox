@@ -22,11 +22,14 @@ jobs:
             - uses: actions/checkout@v3
               with:
                   ref: ${{ github.event.pull_request.head.ref }}
-            - name: autoyapf
-              id: autoyapf
-              uses: mritunjaysharma394/autoyapf@v2
-              with:
-                args: --style pep8 --recursive --in-place .
+            - name: format
+              shell: bash
+              run: |
+                pip install isort ruff black
+                isort . */*/*.py
+                black . */*/*.py
+                ruff check --fix . */*/*.py
+
             - name: Check for modified files
               id: git-check
               run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)

@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/kittycad/kittycad.go"
 	"os"
 	"os/exec"
+
+	"github.com/kittycad/kittycad.go"
 )
 
 func main() {
@@ -16,20 +17,31 @@ func main() {
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	densitySteelGramsPerCubicMillimeter := 0.00784
+	densitySteelGramsPerCubicMeter := 0.00784
 
-	fc, _ := client.File.CreateMass(
-		densitySteelGramsPerCubicMillimeter,
-		"obj",
+	fc, err := client.File.CreateMass(
+		densitySteelGramsPerCubicMeter,
+		kittycad.UnitDensityKgm3,
+		kittycad.UnitMasG,
+		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
+	if err != nil {
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
 	fv, _ := client.File.CreateVolume(
-		"obj",
+		kittycad.UnitVolumeM3,
+		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
+	if err != nil {
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
 
 	fmt.Println("File mass (g): ", fc.Mass)
-	fmt.Println("File volume (mm^3): ", fv.Volume)
+	fmt.Println("File volume (m^3): ", fv.Volume)
 
 	json_data, _ := json.Marshal(struct {
 		Title  string  `json:"title"`
