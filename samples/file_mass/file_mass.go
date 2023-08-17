@@ -17,16 +17,20 @@ func main() {
 	fileBytes, _ := os.ReadFile("./ORIGINALVOXEL-3.obj")
 	// LITTERBOX-END-NON-EDITABLE-SECTION
 
-	// We divide by 1e+9 here to convert from cubic millimeters to cubic meters.
-	densitySteelGramsPerCubicMeter := 0.00784 / 1e+9
+	densitySteelGramsPerCubicMeter := 0.00784
 
-	fc, _ := client.File.CreateMass(
+	fc, err := client.File.CreateMass(
 		densitySteelGramsPerCubicMeter,
 		kittycad.UnitDensityKgm3,
 		kittycad.UnitMasG,
 		kittycad.FileImportFormatObj,
 		fileBytes,
 	)
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
 
 	fmt.Println("File mass (g): ", fc.Mass)
 

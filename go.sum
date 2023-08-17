@@ -11,6 +11,8 @@ github.com/kittycad/kittycad.go v0.2.22 h1:0g5keRDw+3VByVzXf8kCWR/jBzD5+xkUFENAk
 github.com/kittycad/kittycad.go v0.2.22/go.mod h1:DUNM1xFwpiYTSLKnYaJ7t8hu5hekC88t1OEoISlCuDc=
 github.com/kittycad/kittycad.go v0.2.24 h1:6FV7Ylw3306XIJJ+tUymjXrPJPyA/nyZYVTxbYiYHcI=
 github.com/kittycad/kittycad.go v0.2.24/go.mod h1:DUNM1xFwpiYTSLKnYaJ7t8hu5hekC88t1OEoISlCuDc=
+github.com/kittycad/kittycad.go v0.2.25 h1:VoMNPTrZeHtQauBIOvqWgJYBp+B2N4TH64Y/zXqqdv0=
+github.com/kittycad/kittycad.go v0.2.25/go.mod h1:DUNM1xFwpiYTSLKnYaJ7t8hu5hekC88t1OEoISlCuDc=
 github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 go4.org/intern v0.0.0-20211027215823-ae77deb06f29 h1:UXLjNohABv4S58tHmeuIZDO6e3mHpW2Dx33gaNt03LE=
 go4.org/intern v0.0.0-20211027215823-ae77deb06f29/go.mod h1:cS2ma+47FKrLPdXFpr7CuxiTW3eyJbWew4qx0qtQWDA=
