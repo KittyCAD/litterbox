@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from kittycad.api.meta import ping
 from kittycad.client import ClientFromEnv
 

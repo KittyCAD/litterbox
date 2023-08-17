@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+from typing import Tuple
 from kittycad.api.file import create_file_conversion_with_base64_helper
 from kittycad.client import ClientFromEnv
 from kittycad.models.error import Error
@@ -16,17 +18,21 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fc = create_file_conversion_with_base64_helper.sync(
+result = create_file_conversion_with_base64_helper.sync(
     client=client,
     body=content,
     src_format=FileImportFormat.OBJ,
     output_format=FileExportFormat.STEP,
 )
 
-if isinstance(fc, Error) or fc is None:
+if isinstance(result, Error) or result is None:
     raise Exception("There was a problem")
 
-fc: FileConversion = fc
+r: Tuple[FileConversion, bytes] = result  # type: ignore
+
+# Get the bytes of the output file.
+b: bytes = r[1]
+fc: FileConversion = r[0]
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")
@@ -34,5 +40,5 @@ print(f"File conversion status: {fc.status}")
 output_file_path = "./output.step"
 print(f"Saving output to {output_file_path}")
 output_file = open(output_file_path, "wb")
-output_file.write(bytes(fc.output, encoding="utf8"))
+output_file.write(b)
 output_file.close()
