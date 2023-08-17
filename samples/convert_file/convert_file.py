@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
+from kittycad.api.file import create_file_conversion_with_base64_helper
 from kittycad.client import ClientFromEnv
+from kittycad.models.error import Error
 from kittycad.models.file_export_format import FileExportFormat
 from kittycad.models.file_import_format import FileImportFormat
-from kittycad.models.error import Error
-from kittycad.api.file import create_file_conversion_with_base64_helper
 
 # Create a new client with your token parsed from the environment variable:
 #   KITTYCAD_API_TOKEN.
@@ -20,10 +20,13 @@ fc = create_file_conversion_with_base64_helper.sync(
     client=client,
     output_format=FileExportFormat.STL,
     src_format=FileImportFormat.OBJ,
-    body=content)
+    body=content,
+)
 
-if isinstance(fc, Error) or fc == None:
+if isinstance(fc, Error) or fc is None:
     raise Exception("There was a problem")
+
+fc: FileConversion = fc
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")

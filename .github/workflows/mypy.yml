@@ -1,0 +1,34 @@
+name: mypy
+on:
+  push:
+    branches: main
+    paths:
+      - '**.py'
+      - .github/workflows/mypy.yml
+      - 'pyproject.toml'
+      - 'requirements.txt'
+  pull_request:
+    paths:
+      - '**.py'
+      - .github/workflows/mypy.yml
+      - 'pyproject.toml'
+      - 'requirements.txt'
+jobs:
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+
+      # Installation instructions are from: https://python-poetry.org/docs/
+      - name: Install dependencies
+        shell: bash
+        run: |
+          pip install \
+          mypy
+
+      - name: Run mypy
+        shell: bash
+        run: |
+          mypy . */*/*.py
