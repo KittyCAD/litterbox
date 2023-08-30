@@ -40,9 +40,16 @@ func main() {
 	}
 	defer output.Close()
 
-	if _, err := output.Write(fc.Output.Inner); err != nil {
-		panic(err)
+	if len(fc.Outputs) != 1 {
+		panic("Expected 1 output file")
 	}
+
+	for _, contents := range fc.Outputs {
+		if _, err := output.Write(contents.Inner); err != nil {
+			panic(err)
+		}
+	}
+
 	if err := output.Sync(); err != nil {
 		panic(err)
 	}
