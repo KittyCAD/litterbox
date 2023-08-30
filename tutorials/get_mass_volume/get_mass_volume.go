@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
-	"os/exec"
 
 	"github.com/kittycad/kittycad.go"
 )
@@ -61,5 +61,34 @@ func main() {
 	if err := output.Sync(); err != nil {
 		panic(err)
 	}
-	exec.Command("cp", "./ORIGINALVOXEL-3.obj", "./output.obj").Output()
+
+	// Copy the original file to output.obj.
+	if err := copyFile("./ORIGINALVOXEL-3.obj", "./output.obj"); err != nil {
+		panic(err)
+	}
+
+}
+
+func copyFile(src, dst string) error {
+	// Open the source file for reading
+	srcFile, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer srcFile.Close()
+
+	// Create the destination file
+	dstFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer dstFile.Close()
+
+	// Copy the content from src to dst
+	_, err = io.Copy(dstFile, srcFile)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
