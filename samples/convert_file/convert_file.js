@@ -11,12 +11,12 @@ async function main() {
         body,
     })
     if ('error_code' in response) throw response
-    const { status, id, output } = response
+    const { status, id, outputs } = response
     console.log(`File conversion id: ${id}`)
     console.log(`File conversion status: ${status}`)
     
     // LITTERBOX-START-NON-EDITABLE-SECTION
-    await fsp.writeFile('./output.stl' , output, 'base64')
+    await fsp.writeFile('./output.stl' , outputs['source.stl'], 'base64')
 }
 
 main()
