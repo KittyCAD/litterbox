@@ -17,6 +17,9 @@ async function main() {
     
     // LITTERBOX-START-NON-EDITABLE-SECTION
     await fsp.writeFile('./output.stl' , outputs['source.stl'], 'base64')
+    for (const [fileName, fileContents] of Object.entries(outputs)) {
+        await fsp.writeFile(`./${fileName}`, fileContents, 'base64')
+    }
 }
 
 main()
