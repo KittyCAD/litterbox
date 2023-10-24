@@ -110,7 +110,7 @@ jobs:
         with:
           lfs: true
       - name: Set up node ${{ matrix.python-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
