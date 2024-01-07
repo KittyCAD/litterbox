@@ -29,6 +29,9 @@ fm = create_file_center_of_mass.sync(
 if isinstance(fm, Error) or fm is None:
     raise Exception("There was a problem")
 
+if fm.center_of_mass is None:
+    raise Exception("There was a problem")
+
 print(f"File center of mass (meters): {fm.center_of_mass}")
 
 partInfo = {
