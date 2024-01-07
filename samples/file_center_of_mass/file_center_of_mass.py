@@ -33,7 +33,7 @@ print(f"File center of mass (meters): {fm.center_of_mass}")
 
 partInfo = {
     "title": "output.json",
-    "center_of_mass": fm.center_of_mass,
+    "center_of_mass": fm.center_of_mass.model_dump(),
 }
 
 # LITTERBOX-START-NON-EDITABLE-SECTION

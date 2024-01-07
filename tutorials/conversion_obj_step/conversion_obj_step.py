@@ -40,6 +40,9 @@ print(f"File conversion status: {fc.status}")
 if isinstance(fc.outputs, Unset):
     raise Exception("Expected outputs to be set")
 
+if fc.outputs is None:
+    raise Exception("Expected outputs to be set")
+
 outputs: Dict[str, Base64Data] = fc.outputs
 
 if len(outputs) != 1:
