@@ -14,4 +14,3 @@ def make_cube():
         video_res_width=480,
         webrtc=False,
     ) as websocket:
-

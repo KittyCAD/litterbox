@@ -24,4 +24,3 @@
 
         # Ensure the file exists.
         assert os.path.exists(png_path)
-
