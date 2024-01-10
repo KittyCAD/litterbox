@@ -1,6 +1,3 @@
-# continued from previous code snippet.
-
-    ) as websocket:
     # Start the Path
         websocket.send(WebSocketRequest(
             modeling_cmd_req(cmd=ModelingCmd(start_path()), cmd_id=ModelingCmdId(sketch_path_id)),
