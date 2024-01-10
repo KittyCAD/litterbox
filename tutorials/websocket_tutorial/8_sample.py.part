@@ -1,0 +1,6 @@
+# Get the messages.
+        while True:
+                message = websocket.recv()
+                print(json.dumps(message.model_dump_json(), indent=4, sort_keys=True))
+                break
+
