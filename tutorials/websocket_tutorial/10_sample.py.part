@@ -1,0 +1,26 @@
+
+        # Search through the websocket messages and find the one that has the snapshot.
+        png_contents = b""
+        for message in websocket:
+            message_dict = message.model_dump()
+            print(message_dict)
+            if (
+                message_dict["resp"]["data"]["modeling_response"]["type"] == "take_snapshot"
+            ):
+                png_contents = message_dict["resp"]["data"]["modeling_response"][
+                    "data"
+                ]["contents"].get_decoded()
+                break
+
+        # Save the contents to a file.
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        png_path = os.path.join(dir_path, "snapshot.png")
+        print(png_path)
+        with open(png_path, "wb") as f:
+            f.write(png_contents)
+
+        # Ensure the file is not empty.
+        assert len(png_contents) > 0
+
+        # Ensure the file exists.
+        assert os.path.exists(png_path)

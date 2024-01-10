@@ -71,6 +71,7 @@ jobs:
           - ./tutorials/getting_started
           - ./tutorials/modeling_websocket
           - ./tutorials/beginner_tutorial
+          - ./tutorials/websocket_tutorial
           - ./samples/convert_file
           - ./samples/file_density
           - ./samples/file_mass
@@ -95,6 +96,13 @@ jobs:
       - name: Run scripts
         shell: bash
         run: |
+          p=${{ matrix.test-path }}
+          for f in $(find "$p" -name "*.*.*" | sed 's/.*[0-9]*_\(.*\)\.part/\1/' | sort -u | uniq);
+          do
+            cd "$p";
+            cat $(ls *$f.part | sort -g) > "$f";
+            cd -;
+          done
           FILE=$(find ${{ matrix.test-path }} -name "*.py")
           python $FILE
         env:

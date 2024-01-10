@@ -1,0 +1,21 @@
+# continued from previous code snippet.
+
+        # Orient the camera.
+        websocket.send(WebSocketRequest(
+            modeling_cmd_req(
+                cmd=ModelingCmd(default_camera_look_at(
+                    center = {"x": 0, "y": 0, "z": 0},
+                    up = {"x": 0, "y": 0, "z": 1},
+                    vantage = {"x": 20, "y": 20, "z": 20},
+                )),
+                cmd_id=ModelingCmdId(uuid.uuid4())
+            )
+        ))
+
+        # Take a snapshot.
+        websocket.send(WebSocketRequest(
+            modeling_cmd_req(
+                cmd=ModelingCmd(take_snapshot(format=ImageFormat.PNG)),
+                cmd_id=ModelingCmdId(uuid.uuid4())
+            )
+        ))
