@@ -8,6 +8,6 @@
   "author": "KittyCAD",
   "license": "",
   "dependencies": {
-    "@kittycad/lib": "^0.0.49"
+    "@kittycad/lib": "^0.0.50"
   }
 }
