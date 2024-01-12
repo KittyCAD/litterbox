@@ -25,6 +25,7 @@ from kittycad.models.modeling_cmd import (
 )
 from kittycad.models.web_socket_request import modeling_cmd_req
 
+
 def test_ws_import():
     # Create our client.
     client = ClientFromEnv()
@@ -167,5 +168,6 @@ def test_ws_import():
 
         # Ensure the file exists.
         assert os.path.exists(png_path)
+
 
 test_ws_import()
