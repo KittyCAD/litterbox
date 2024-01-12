@@ -141,6 +141,31 @@ jobs:
         env:
           KITTYCAD_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
+  build-test-rs-versions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-path:
+          - ./tutorials/websocket_tutorial/draw_cube_rust
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Set up node ${{ matrix.python-version }}
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+
+      - name: Run sources
+        shell: bash
+        run: |
+          cd ${{ matrix.test-path }}
+          cargo run
+        env:
+          KITTYCAD_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+
   commit-script-outputs:
     # Using the python script to commit the output of the scripts
     # The go scripts should have the same output
