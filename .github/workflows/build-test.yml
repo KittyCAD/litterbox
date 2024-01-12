@@ -69,7 +69,6 @@ jobs:
           - ./tutorials/conversion_obj_stl
           - ./tutorials/get_mass_volume
           - ./tutorials/getting_started
-          - ./tutorials/modeling_websocket
           - ./tutorials/beginner_tutorial
           - ./tutorials/websocket_tutorial
           - ./samples/convert_file
