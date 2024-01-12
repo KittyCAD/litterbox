@@ -1,9 +1,8 @@
 import os
 import uuid
 
-from kittycad.client import ClientFromEnv
-
 from kittycad.api.modeling import modeling_commands_ws
+from kittycad.client import ClientFromEnv
 from kittycad.models import (
     Axis,
     AxisDirectionPair,

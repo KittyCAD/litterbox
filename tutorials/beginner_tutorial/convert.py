@@ -1,12 +1,12 @@
-from typing import Optional, Union
+from typing import Dict, Optional, Union
+
 from kittycad.api.file import create_file_conversion
 from kittycad.client import ClientFromEnv
 from kittycad.models import Error, FileConversion
+from kittycad.models.base64data import Base64Data
 from kittycad.models.file_export_format import FileExportFormat
 from kittycad.models.file_import_format import FileImportFormat
 from kittycad.types import Unset
-from kittycad.models.base64data import Base64Data
-from typing import Dict
 
 
 # Create a new client with your token parsed from the environment variable
