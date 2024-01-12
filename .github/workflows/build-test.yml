@@ -138,7 +138,7 @@ jobs:
           FILE=$(find ${{ matrix.test-path }} -name "*.js")
           node $FILE
         env:
-          KITTYCAD_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
+          KITTYCAD_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
 
   build-test-rs-versions:
     runs-on: ubuntu-latest
