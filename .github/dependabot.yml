@@ -21,3 +21,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+  - package-ecosystem: "cargo" # See documentation for possible values
+    directory: "/tutorials/websocket_tutorial/draw_cube_rust/" # Location of package manifests
+    schedule:
+      interval: "daily"
