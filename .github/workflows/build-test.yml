@@ -7,6 +7,9 @@ on:
       - '**.go'
       - '**.js'
       - '**.ts'
+      - '**.rs'
+      - '**/Cargo.toml'
+      - '**/Cargo.lock'
       - 'ORIGINALVOXEL-3.obj'
       - .github/workflows/build-test.yml
       - requirements.txt
@@ -17,6 +20,9 @@ on:
       - '**.go'
       - '**.js'
       - '**.ts'
+      - '**.rs'
+      - '**/Cargo.toml'
+      - '**/Cargo.lock'
       - 'ORIGINALVOXEL-3.obj'
       - .github/workflows/build-test.yml
       - requirements.txt
