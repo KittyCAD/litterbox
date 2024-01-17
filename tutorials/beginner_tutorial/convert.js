@@ -13,7 +13,7 @@ async function convertOBJtoSTEP() {
     for (const key in response.outputs) {
         if (response.outputs.hasOwnProperty(key)) {
           const output = response.outputs[key];
-          const outputFilePath = "./output.step";
+          const outputFilePath = "./gear.step";
         
           console.log(`Saving output to ${outputFilePath}`);
         
