@@ -11,11 +11,11 @@ from kittycad.types import Unset
 
 # Create a new client with your token parsed from the environment variable
 # KITTYCAD_API_TOKEN
-def convertCubetoSTL():
+def convertOBJtoSTL():
     client = ClientFromEnv(timeout=500, verify_ssl=True)
     # Convert a file from OBJ to STL.
     # Read in the contents of the file.
-    file = open("./cube.obj", "rb")
+    file = open("./dodecahedron.obj", "rb")
     content = file.read()
     file.close()
     result: Optional[Union[Error, FileConversion]] = create_file_conversion.sync(
@@ -32,7 +32,7 @@ def convertCubetoSTL():
     outputs: Dict[str, Base64Data] = body.outputs
 
     for _, output in outputs.items():
-        output_file_path = "./output.stl"
+        output_file_path = "./dodecahedron.stl"
         print(f"Saving output to {output_file_path}")
         output_file = open(output_file_path, "wb")
         output_file.write(output.get_decoded())
@@ -40,4 +40,4 @@ def convertCubetoSTL():
     return body
 
 
-convertCubetoSTL()
+convertOBJtoSTL()
