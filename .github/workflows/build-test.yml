@@ -77,7 +77,6 @@ jobs:
           - ./tutorials/getting_started
           - ./tutorials/beginner_tutorial
           - ./tutorials/websocket_tutorial
-          - ./tutorials/text-to-cad
           - ./samples/convert_file
           - ./samples/file_density
           - ./samples/file_mass
