@@ -254,7 +254,7 @@ jobs:
         run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)
 
       - name: Commit changes, if any
-        if: steps.git-check.outputs.modified == 'true'
+        if: steps.git-check.outputs.modified == 'true' &&  github.actor != 'dependabot[bot]'
         run: |
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
