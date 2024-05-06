@@ -31,6 +31,7 @@ def make_cube():
         client=client,
         fps=30,
         unlocked_framerate=False,
+        post_effect="noeffect",
         video_res_height=360,
         video_res_width=480,
         webrtc=False,
