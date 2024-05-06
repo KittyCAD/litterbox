@@ -10,7 +10,7 @@ color-eyre = "0.6.2"
 futures = "0.3.30"
 image = "0.24.8"
 kittycad = "0.2.46"
-reqwest = "0.11.23"
+reqwest = "0.12.4"
 serde = "1.0.200"
 serde_json = "1.0.116"
 tokio = { version = "1.37.0", features = ["macros", "rt"] }
