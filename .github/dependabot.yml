@@ -9,19 +9,40 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    reviewers:
+      - jessfraz
+      - franknoirot
+      - jgomez720
   - package-ecosystem: "gomod" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    reviewers:
+      - jessfraz
+      - franknoirot
+      - jgomez720
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    reviewers:
+      - jessfraz
+      - franknoirot
+      - jgomez720
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    reviewers:
+      - jessfraz
+      - franknoirot
+      - jgomez720
   - package-ecosystem: "cargo" # See documentation for possible values
     directory: "/tutorials/websocket_tutorial/draw_cube_rust/" # Location of package manifests
     schedule:
       interval: "daily"
+    reviewers:
+      - adamchalmers
+      - jessfraz
+      - franknoirot
+      - jgomez720
