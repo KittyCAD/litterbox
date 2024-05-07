@@ -29,7 +29,15 @@ async fn main() -> Result<()> {
     // Establish a WebSocket connection to KittyCAD's modeling API.
     let ws = kittycad_api_client
         .modeling()
-        .commands_ws(Some(30), Some(false), Some(480), Some(640), Some(false))
+        .commands_ws(
+            Some(30),
+            None,
+            None,
+            Some(false),
+            Some(480),
+            Some(640),
+            Some(false),
+        )
         .await
         .context("Could not open WebSocket to KittyCAD Modeling API")?;
 
@@ -85,7 +93,7 @@ async fn draw_cube(
         .send(to_msg(
             ModelingCmd::MovePathPen {
                 path: path_id,
-                to: start.clone(),
+                to: start,
             },
             Uuid::new_v4(),
         ))
