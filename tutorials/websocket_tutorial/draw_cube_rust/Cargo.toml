@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-color-eyre = "0.6.2"
+color-eyre = "0.6.3"
 futures = "0.3.30"
 image = "0.24.8"
 kittycad = "0.2.46"
