@@ -30,6 +30,7 @@ def make_cube():
     with modeling_commands_ws.WebSocket(
         client=client,
         fps=30,
+        show_grid=True,
         unlocked_framerate=False,
         post_effect="noeffect",
         video_res_height=360,
