@@ -203,7 +203,7 @@ def make_cube():
 
         # Save the contents to a file.
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        png_path = os.path.join(dir_path, "snapshot.png")
+        png_path = os.path.join(dir_path, "output.png")
         print(png_path)
         with open(png_path, "wb") as f:
             f.write(png_contents)
