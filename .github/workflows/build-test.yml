@@ -221,7 +221,7 @@ jobs:
           do
             FULL_FILE=$(find $FILE -name "*.py")
             python $FULL_FILE
-            mv output.* $FILE
+            mv output.* $FILE || true
             OUTPUT_FILE=$(find $FILE -name output.*)
             if [[ $OUTPUT_FILE == *.step ]]
               # current date is added to step file, meaning there will always be a diff, clamping this to a consistent date to prevent this
@@ -245,7 +245,7 @@ jobs:
       - name: stage outputs
         run: |
           git add "tutorials/**/*output.*"
-          git add "tutorials/**/snapshot.png"
+          git add "tutorials/**/*.png"
           git add "samples/**/*output.*"
 
       - name: git status
