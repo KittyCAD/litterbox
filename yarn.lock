@@ -27,10 +27,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@kittycad/lib@^0.0.71":
-  version "0.0.71"
-  resolved "https://registry.yarnpkg.com/@kittycad/lib/-/lib-0.0.71.tgz#d27db49ab513d3f1735704dfb2cf253fb83a950d"
-  integrity sha512-qdrk/dBr0gWermelUp8u+03nPRX5rTYcVGNmFgxmK/MEGjoCTsVnR89/U57F2xxmaevCB7f2R4Xs1ZJhcln8sA==
+"@kittycad/lib@^0.0.74":
+  version "0.0.74"
+  resolved "https://registry.yarnpkg.com/@kittycad/lib/-/lib-0.0.74.tgz#c3f079e02ba9692d877c86dc6531e1f6ad8901ec"
+  integrity sha512-7OJlVPFBNiXP7vgtKA6k4g12mFPL1zUsyXuqepfQm7LrTTZbEMZ6nSjzxRwp+Ck4SHGg/ywZdxMhOIdFqUpL8A==
   dependencies:
     node-fetch "3.3.2"
     openapi-types "^12.0.0"
