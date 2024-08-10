@@ -1,6 +1,6 @@
 import time
 
-from kittycad.api.ai import create_text_to_cad, get_text_to_cad_model_for_user
+from kittycad.api.ml import create_text_to_cad, get_text_to_cad_model_for_user
 from kittycad.client import ClientFromEnv
 from kittycad.models.api_call_status import ApiCallStatus
 from kittycad.models.file_export_format import FileExportFormat
