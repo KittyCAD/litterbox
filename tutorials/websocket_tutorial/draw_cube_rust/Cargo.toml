@@ -11,7 +11,7 @@ image = "0.25.2"
 kittycad = "0.3.12"
 reqwest = "0.11.23"
 serde = "1.0.205"
-serde_json = "1.0.122"
+serde_json = "1.0.124"
 tokio = { version = "1.39.2", features = ["macros", "rt"] }
 tokio-tungstenite = "0.23.0"
 uuid = "1.10.0"
