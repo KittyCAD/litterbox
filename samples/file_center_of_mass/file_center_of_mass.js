@@ -1,7 +1,7 @@
 import fsp from 'fs/promises'
 import { exec } from 'child_process'
 import { promisify } from 'util'
-import { file } from '@kittycad/lib'
+import { file } from '@kittycad/lib/import'
 
 async function main() {
     const body = await fsp.readFile('./seesaw.obj', 'base64')
