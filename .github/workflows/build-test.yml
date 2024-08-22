@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [16, 18]
+        node: [20]
         test-path:
           - ./tutorials/beginner_tutorial
           - ./samples/convert_file
