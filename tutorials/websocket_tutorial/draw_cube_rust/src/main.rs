@@ -33,6 +33,7 @@ async fn main() -> Result<()> {
             Some(30),
             None,
             None,
+            None,
             Some(true),
             Some(false),
             Some(480),
@@ -45,7 +46,7 @@ async fn main() -> Result<()> {
     // Now that we have a WebSocket connection, we can split it into two ends:
     // one for writing to and one for reading from.
     let (write, read) = tokio_tungstenite::WebSocketStream::from_raw_socket(
-        ws,
+        ws.0,
         tokio_tungstenite::tungstenite::protocol::Role::Client,
         None,
     )
@@ -232,7 +233,7 @@ async fn export_png(
 }
 
 fn save_image(contents: Vec<u8>, output_path: &str) -> Result<()> {
-    let mut img = image::io::Reader::new(Cursor::new(contents));
+    let mut img = image::ImageReader::new(Cursor::new(contents));
     img.set_format(image::ImageFormat::Png);
     let img = img.decode()?;
     img.save(output_path)?;
