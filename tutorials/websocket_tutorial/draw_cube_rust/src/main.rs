@@ -142,7 +142,6 @@ async fn draw_cube(
     write_to_ws
         .send(to_msg(
             ModelingCmd::Extrude {
-                cap: true,
                 distance: width * 2.0,
                 target: path_id,
             },

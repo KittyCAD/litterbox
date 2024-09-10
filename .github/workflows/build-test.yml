@@ -36,6 +36,7 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         go-version: [1.18]
         test-path:
@@ -70,6 +71,7 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: [3.9]
         test-path:
@@ -119,6 +121,7 @@ jobs:
   build-test-js-versions:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node: [20]
         test-path:
@@ -152,6 +155,7 @@ jobs:
   build-test-rs-versions:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         test-path:
           - ./tutorials/websocket_tutorial/draw_cube_rust
@@ -181,6 +185,7 @@ jobs:
     needs: [build-test-python-versions]
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: [3.9]
     steps:

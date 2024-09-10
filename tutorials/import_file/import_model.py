@@ -16,13 +16,13 @@ from kittycad.models import (
     UnitLength,
     WebSocketRequest,
 )
-from kittycad.models.input_format import obj
+from kittycad.models.input_format import OptionObj
 from kittycad.models.modeling_cmd import (
-    default_camera_focus_on,
-    import_files,
-    take_snapshot,
+    OptionDefaultCameraFocusOn,
+    OptionImportFiles,
+    OptionTakeSnapshot,
 )
-from kittycad.models.web_socket_request import modeling_cmd_req
+from kittycad.models.web_socket_request import OptionModelingCmdReq
 
 
 def test_ws_import():
@@ -49,12 +49,12 @@ def test_ws_import():
         ImportFile(data=content, path=file_name)
         # form the request
         req = WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
-                    import_files(
+                    OptionImportFiles(
                         files=[ImportFile(data=content, path=file_name)],
                         format=InputFormat(
-                            obj(
+                            OptionObj(
                                 units=UnitLength.M,
                                 coords=System(
                                     forward=AxisDirectionPair(
@@ -103,8 +103,8 @@ def test_ws_import():
         cmd_id = uuid.uuid4()
         # form the request
         req = WebSocketRequest(
-            modeling_cmd_req(
-                cmd=ModelingCmd(default_camera_focus_on(uuid=object_id)),
+            OptionModelingCmdReq(
+                cmd=ModelingCmd(OptionDefaultCameraFocusOn(uuid=object_id)),
                 cmd_id=ModelingCmdId(cmd_id),
             )
         )
@@ -127,8 +127,8 @@ def test_ws_import():
         cmd_id = uuid.uuid4()
         # form the request
         req = WebSocketRequest(
-            modeling_cmd_req(
-                cmd=ModelingCmd(take_snapshot(format=ImageFormat.PNG)),
+            OptionModelingCmdReq(
+                cmd=ModelingCmd(OptionTakeSnapshot(format=ImageFormat.PNG)),
                 cmd_id=ModelingCmdId(cmd_id),
             )
         )
@@ -154,7 +154,7 @@ def test_ws_import():
                 # Break since now we know it was a success.
                 png_contents = message_dict["resp"]["data"]["modeling_response"][
                     "data"
-                ]["contents"].get_decoded()
+                ]["contents"]
                 break
 
         # Save the contents to a file.

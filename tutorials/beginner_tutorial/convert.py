@@ -43,7 +43,7 @@ def convertOBJtoSTL():
         output_file_path = "./dodecahedron.stl"
         print(f"Saving output to {output_file_path}")
         output_file = open(output_file_path, "wb")
-        output_file.write(output.get_decoded())
+        output_file.write(output)
         output_file.close()
     return body
 
