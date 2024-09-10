@@ -196,7 +196,7 @@ def make_cube():
             ):
                 png_contents = message_dict["resp"]["data"]["modeling_response"][
                     "data"
-                ]["contents"].get_decoded()
+                ]["contents"]
                 break
 
         # Save the contents to a file.

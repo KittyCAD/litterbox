@@ -154,7 +154,7 @@ def test_ws_import():
                 # Break since now we know it was a success.
                 png_contents = message_dict["resp"]["data"]["modeling_response"][
                     "data"
-                ]["contents"].get_decoded()
+                ]["contents"]
                 break
 
         # Save the contents to a file.
