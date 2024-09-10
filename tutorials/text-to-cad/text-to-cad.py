@@ -42,5 +42,5 @@ elif response.status == ApiCallStatus.COMPLETED:
     # Save the STEP data as text-to-cad-output.step
     final_result = response.outputs["source.step"]
     with open("text-to-cad-output.step", "w", encoding="utf-8") as output_file:
-        output_file.write(final_result.get_decoded().decode("utf-8"))
+        output_file.write(final_result.decode("utf-8"))
         print(f"Saved output to {output_file.name}")

@@ -12,7 +12,6 @@ on:
         paths:
             - '**.py'
     workflow_dispatch:
-        inputs:
 jobs:
     format:
         # Check if the PR is not from a fork
