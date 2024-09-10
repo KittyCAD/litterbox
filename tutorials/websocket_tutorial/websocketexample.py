@@ -42,7 +42,8 @@ def make_cube():
         websocket.send(
             WebSocketRequest(
                 modeling_cmd_req(
-                    cmd=ModelingCmd(OptionStartPath()), cmd_id=ModelingCmdId(sketch_path_id)
+                    cmd=ModelingCmd(OptionStartPath()),
+                    cmd_id=ModelingCmdId(sketch_path_id),
                 ),
             )
         )
@@ -132,7 +133,9 @@ def make_cube():
         websocket.send(
             WebSocketRequest(
                 modeling_cmd_req(
-                    cmd=ModelingCmd(OptionClosePath(path_id=ModelingCmdId(sketch_path_id))),
+                    cmd=ModelingCmd(
+                        OptionClosePath(path_id=ModelingCmdId(sketch_path_id))
+                    ),
                     cmd_id=ModelingCmdId(uuid.uuid4()),
                 )
             )
