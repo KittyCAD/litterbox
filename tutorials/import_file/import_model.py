@@ -18,9 +18,9 @@ from kittycad.models import (
 )
 from kittycad.models.input_format import obj
 from kittycad.models.modeling_cmd import (
-    default_camera_focus_on,
-    import_files,
-    take_snapshot,
+    OptionDefaultCameraFocusOn,
+    OptionImportFiles,
+    OptionTakeSnapshot,
 )
 from kittycad.models.web_socket_request import modeling_cmd_req
 
@@ -51,7 +51,7 @@ def test_ws_import():
         req = WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    import_files(
+                    OptionImportFiles(
                         files=[ImportFile(data=content, path=file_name)],
                         format=InputFormat(
                             obj(
@@ -104,7 +104,7 @@ def test_ws_import():
         # form the request
         req = WebSocketRequest(
             modeling_cmd_req(
-                cmd=ModelingCmd(default_camera_focus_on(uuid=object_id)),
+                cmd=ModelingCmd(OptionDefaultCameraFocusOn(uuid=object_id)),
                 cmd_id=ModelingCmdId(cmd_id),
             )
         )
@@ -128,7 +128,7 @@ def test_ws_import():
         # form the request
         req = WebSocketRequest(
             modeling_cmd_req(
-                cmd=ModelingCmd(take_snapshot(format=ImageFormat.PNG)),
+                cmd=ModelingCmd(OptionTakeSnapshot(format=ImageFormat.PNG)),
                 cmd_id=ModelingCmdId(cmd_id),
             )
         )
