@@ -19,7 +19,6 @@ from kittycad.models.web_socket_request import modeling_cmd_req
 
 
 def make_cube():
-
     # Create our client.
     client = ClientFromEnv()
 
@@ -37,7 +36,6 @@ def make_cube():
         video_res_width=480,
         webrtc=False,
     ) as websocket:
-
         # Draw a sqaure
 
         # Start the Path
