@@ -6,13 +6,13 @@ from kittycad.api.modeling import modeling_commands_ws
 from kittycad.client import ClientFromEnv
 from kittycad.models import ImageFormat, ModelingCmd, ModelingCmdId, WebSocketRequest
 from kittycad.models.modeling_cmd import (
-    close_path,
-    default_camera_look_at,
-    extend_path,
-    extrude,
-    move_path_pen,
-    start_path,
-    take_snapshot,
+    OptionClosePath,
+    OptionDefaultCameraLookAt,
+    OptionExtendPath,
+    OptionExtrude,
+    OptionMovePathPen,
+    OptionStartPath,
+    OptionTakeSnapshot,
 )
 from kittycad.models.path_segment import line
 from kittycad.models.web_socket_request import modeling_cmd_req
@@ -42,7 +42,7 @@ def make_cube():
         websocket.send(
             WebSocketRequest(
                 modeling_cmd_req(
-                    cmd=ModelingCmd(start_path()), cmd_id=ModelingCmdId(sketch_path_id)
+                    cmd=ModelingCmd(OptionStartPath()), cmd_id=ModelingCmdId(sketch_path_id)
                 ),
             )
         )
@@ -51,7 +51,7 @@ def make_cube():
             WebSocketRequest(
                 modeling_cmd_req(
                     cmd=ModelingCmd(
-                        move_path_pen(
+                        OptionMovePathPen(
                             path=str(sketch_path_id),
                             to={
                                 "x": -5,
@@ -69,7 +69,7 @@ def make_cube():
             WebSocketRequest(
                 modeling_cmd_req(
                     cmd=ModelingCmd(
-                        extend_path(
+                        OptionExtendPath(
                             path=str(sketch_path_id),
                             segment=line(
                                 end={
@@ -90,7 +90,7 @@ def make_cube():
             WebSocketRequest(
                 modeling_cmd_req(
                     cmd=ModelingCmd(
-                        extend_path(
+                        OptionExtendPath(
                             path=str(sketch_path_id),
                             segment=line(
                                 end={
@@ -111,7 +111,7 @@ def make_cube():
             WebSocketRequest(
                 modeling_cmd_req(
                     cmd=ModelingCmd(
-                        extend_path(
+                        OptionExtendPath(
                             path=str(sketch_path_id),
                             segment=line(
                                 end={
@@ -132,18 +132,18 @@ def make_cube():
         websocket.send(
             WebSocketRequest(
                 modeling_cmd_req(
-                    cmd=ModelingCmd(close_path(path_id=ModelingCmdId(sketch_path_id))),
+                    cmd=ModelingCmd(OptionClosePath(path_id=ModelingCmdId(sketch_path_id))),
                     cmd_id=ModelingCmdId(uuid.uuid4()),
                 )
             )
         )
 
-        # Extrude the square into a cube
+        # OptionExtrude the square into a cube
         websocket.send(
             WebSocketRequest(
                 modeling_cmd_req(
                     cmd=ModelingCmd(
-                        extrude(
+                        OptionExtrude(
                             cap=True,
                             distance=10,
                             target=ModelingCmdId(sketch_path_id),
@@ -165,7 +165,7 @@ def make_cube():
             WebSocketRequest(
                 modeling_cmd_req(
                     cmd=ModelingCmd(
-                        default_camera_look_at(
+                        OptionDefaultCameraLookAt(
                             center={"x": 0, "y": 0, "z": 0},
                             up={"x": 0, "y": 0, "z": 1},
                             vantage={"x": 20, "y": 20, "z": 20},
@@ -180,7 +180,7 @@ def make_cube():
         websocket.send(
             WebSocketRequest(
                 modeling_cmd_req(
-                    cmd=ModelingCmd(take_snapshot(format=ImageFormat.PNG)),
+                    cmd=ModelingCmd(OptionTakeSnapshot(format=ImageFormat.PNG)),
                     cmd_id=ModelingCmdId(uuid.uuid4()),
                 )
             )
