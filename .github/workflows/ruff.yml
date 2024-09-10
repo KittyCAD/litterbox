@@ -32,3 +32,4 @@ jobs:
         shell: bash
         run: |
           ruff check --output-format=github . */*/*.py
+          ruff format --check

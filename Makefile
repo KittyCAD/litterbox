@@ -23,7 +23,7 @@ format: docker-image ## Format all the python files.
 		--disable-content-trust \
 		-v $(CURDIR):/home/user/src \
 		--workdir /home/user/src \
-		$(DOCKER_IMAGE_NAME) sh -c 'isort . */*/*.py && black . */*/*.py && ruff check --fix . */*/*.py'
+		$(DOCKER_IMAGE_NAME) sh -c 'isort . */*/*.py && ruff format && ruff check --fix . */*/*.py'
 
 .PHONY: shell
 shell: docker-image ## Pop into a shell in the docker image.
