@@ -14,8 +14,8 @@ from kittycad.models.modeling_cmd import (
     OptionStartPath,
     OptionTakeSnapshot,
 )
-from kittycad.models.path_segment import line
-from kittycad.models.web_socket_request import modeling_cmd_req
+from kittycad.models.path_segment import OptionLine
+from kittycad.models.web_socket_request import OptionModelingCmdReq
 
 
 def make_cube():
@@ -41,7 +41,7 @@ def make_cube():
         # Start the Path
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(OptionStartPath()),
                     cmd_id=ModelingCmdId(sketch_path_id),
                 ),
@@ -50,7 +50,7 @@ def make_cube():
 
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionMovePathPen(
                             path=str(sketch_path_id),
@@ -68,11 +68,11 @@ def make_cube():
 
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionExtendPath(
                             path=str(sketch_path_id),
-                            segment=line(
+                            segment=OptionLine(
                                 end={
                                     "x": 10,
                                     "y": 0,
@@ -89,11 +89,11 @@ def make_cube():
 
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionExtendPath(
                             path=str(sketch_path_id),
-                            segment=line(
+                            segment=OptionLine(
                                 end={
                                     "x": 0,
                                     "y": 10,
@@ -110,11 +110,11 @@ def make_cube():
 
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionExtendPath(
                             path=str(sketch_path_id),
-                            segment=line(
+                            segment=OptionLine(
                                 end={
                                     "x": -10,
                                     "y": 0,
@@ -132,7 +132,7 @@ def make_cube():
         # Close the sketch
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionClosePath(path_id=ModelingCmdId(sketch_path_id))
                     ),
@@ -144,7 +144,7 @@ def make_cube():
         # OptionExtrude the square into a cube
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionExtrude(
                             cap=True,
@@ -166,7 +166,7 @@ def make_cube():
         # Orient the camera.
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionDefaultCameraLookAt(
                             center={"x": 0, "y": 0, "z": 0},
@@ -182,7 +182,7 @@ def make_cube():
         # Take a snapshot.
         websocket.send(
             WebSocketRequest(
-                modeling_cmd_req(
+                OptionModelingCmdReq(
                     cmd=ModelingCmd(OptionTakeSnapshot(format=ImageFormat.PNG)),
                     cmd_id=ModelingCmdId(uuid.uuid4()),
                 )
