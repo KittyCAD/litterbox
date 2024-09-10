@@ -27,7 +27,7 @@ jobs:
               run: |
                 pip install isort ruff black
                 isort . */*/*.py
-                black . */*/*.py
+                ruff format
                 ruff check --fix . */*/*.py
 
             - name: Check for modified files
@@ -41,5 +41,5 @@ jobs:
                   git config --local user.name "github-actions[bot]"
                   git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
                   git fetch origin
-                  git commit -am "LOOK ON MY REFORMAT, YE MIGHTY, AND DESPAIR!"
-                  git push origin ${{github.event.pull_request.head.ref }}
+                  git commit -am "LOOK ON MY REFORMAT, YE MIGHTY, AND DESPAIR!" || true
+                  git push origin ${{github.event.pull_request.head.ref }} || true
