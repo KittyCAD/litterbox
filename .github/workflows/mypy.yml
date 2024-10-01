@@ -21,13 +21,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
 
-      # Installation instructions are from: https://python-poetry.org/docs/
-      - name: Install dependencies
-        shell: bash
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v3
+      - name: Install deps
         run: |
-          pip install \
-          mypy
-          pip install -r requirements.txt
+            uv venv .venv
+            echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+            echo "$PWD/.venv/bin" >> $GITHUB_PATH
+            uv pip install \
+              mypy
+            uv pip install -r requirements.txt
 
       - name: Run mypy
         shell: bash

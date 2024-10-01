@@ -98,10 +98,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        shell: bash
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v3
+      - name: Install deps
         run: |
-          pip install -r requirements.txt
+            uv venv .venv
+            echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+            echo "$PWD/.venv/bin" >> $GITHUB_PATH
+            uv pip install  -r requirements.txt
 
       - name: Run scripts
         shell: bash
@@ -198,10 +202,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        shell: bash
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v3
+      - name: Install deps
         run: |
-          pip install -r requirements.txt
+            uv venv .venv
+            echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+            echo "$PWD/.venv/bin" >> $GITHUB_PATH
+            uv pip install  -r requirements.txt
 
       - name: remove previous outputs
         shell: bash
