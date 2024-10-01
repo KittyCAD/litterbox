@@ -4,12 +4,12 @@
         websocket.send(WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    extrude(
+                    OptionExtrude(
                         cap=True,
                         distance=10,
                         target=ModelingCmdId(sketch_path_id),
                     )
-                ), 
+                ),
                 cmd_id=ModelingCmdId(uuid.uuid4())
             )
         ))

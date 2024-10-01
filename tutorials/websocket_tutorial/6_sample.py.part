@@ -4,7 +4,7 @@
         websocket.send(WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    move_path_pen(
+                    OptionMovePathPen(
                         path=str(sketch_path_id),
                         to={
                             "x": -5,
@@ -19,7 +19,7 @@
         websocket.send(WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    extend_path(
+                    OptionExtendPath(
                         path=str(sketch_path_id),
                         segment=OptionLine(
                             end={
@@ -37,7 +37,7 @@
         websocket.send(WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    extend_path(
+                    OptionExtendPath(
                         path=str(sketch_path_id),
                         segment=OptionLine(
                             end={
@@ -55,7 +55,7 @@
         websocket.send(WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    extend_path(
+                    OptionExtendPath(
                         path=str(sketch_path_id),
                         segment=OptionLine(
                             end={
@@ -76,7 +76,7 @@
         websocket.send(WebSocketRequest(
             modeling_cmd_req(
                 cmd=ModelingCmd(
-                    close_path(
+                    OptionClosePath(
                         path_id=ModelingCmdId(sketch_path_id) # Notice that we need to provide the sketch path UUID we created in the beginning.
                     )
                 ),
