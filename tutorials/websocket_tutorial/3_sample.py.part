@@ -5,14 +5,14 @@ from kittycad.models import (
     ModelingCmdId,
     WebSocketRequest,
 )
-from kittycad.models.path_segment import PathSegment, line
+from kittycad.models.path_segment import PathSegment, OptionLine
 from kittycad.models.modeling_cmd import (
-    default_camera_look_at,
-    start_path,
-    take_snapshot,
-    extend_path,
-    move_path_pen,
-    extrude,
-    close_path,
+    OptionDefaultCameraLookAt,
+    OptionStartPath,
+    OptionTakeSnapshot,
+    OptionExtendPath,
+    OptionMovePathPen,
+    OptionExtrude,
+    OptionClosePath,
 )
-from kittycad.models.web_socket_request import modeling_cmd_req
+from kittycad.models.web_socket_request import OptionModelingCmdReq
