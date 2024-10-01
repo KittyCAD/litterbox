@@ -21,7 +21,7 @@
                 cmd=ModelingCmd(
                     extend_path(
                         path=str(sketch_path_id),
-                        segment=Line(
+                        segment=OptionLine(
                             end={
                                 "x": 10,
                                 "y": 0,
@@ -39,7 +39,7 @@
                 cmd=ModelingCmd(
                     extend_path(
                         path=str(sketch_path_id),
-                        segment=Line(
+                        segment=OptionLine(
                             end={
                                 "x": 0,
                                 "y": 10,
@@ -57,7 +57,7 @@
                 cmd=ModelingCmd(
                     extend_path(
                         path=str(sketch_path_id),
-                        segment=Line(
+                        segment=OptionLine(
                             end={
                                 "x": -10,
                                 "y": 0,
