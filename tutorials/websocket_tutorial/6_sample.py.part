@@ -2,7 +2,7 @@
 
         # Move the pen to the bottom left corner.
         websocket.send(WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
                     OptionMovePathPen(
                         path=str(sketch_path_id),
@@ -17,7 +17,7 @@
 
         # The next three websocket.send blocks are drawing the line to the right, up, and then to the left.
         websocket.send(WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
                     OptionExtendPath(
                         path=str(sketch_path_id),
@@ -35,7 +35,7 @@
         ))
 
         websocket.send(WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
                     OptionExtendPath(
                         path=str(sketch_path_id),
@@ -53,7 +53,7 @@
         ))
 
         websocket.send(WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
                     OptionExtendPath(
                         path=str(sketch_path_id),
@@ -74,7 +74,7 @@
 
         # Close the sketch
         websocket.send(WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
                     OptionClosePath(
                         path_id=ModelingCmdId(sketch_path_id) # Notice that we need to provide the sketch path UUID we created in the beginning.

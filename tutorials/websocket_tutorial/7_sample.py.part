@@ -2,7 +2,7 @@
 
         # Extrude the sketch.
         websocket.send(WebSocketRequest(
-            modeling_cmd_req(
+            OptionModelingCmdReq(
                 cmd=ModelingCmd(
                     OptionExtrude(
                         cap=True,
