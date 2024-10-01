@@ -5,14 +5,14 @@
             modeling_cmd_req(
                 cmd=ModelingCmd(
                     move_path_pen(
-                        path=str(sketch_path_id), 
+                        path=str(sketch_path_id),
                         to={
                             "x": -5,
                             "y": -5,
                             "z": 0,
                         }
                     )
-                ), 
+                ),
                 cmd_id=ModelingCmdId(uuid.uuid4())))) # Create a new UUID for this command.
 
         # The next three websocket.send blocks are drawing the line to the right, up, and then to the left.
@@ -21,7 +21,7 @@
                 cmd=ModelingCmd(
                     extend_path(
                         path=str(sketch_path_id),
-                        segment=line(
+                        segment=Line(
                             end={
                                 "x": 10,
                                 "y": 0,
@@ -29,25 +29,7 @@
                             },
                             relative=True, # This means that the line is relative to the current position of the pen.
                         )
-                    )), 
-                cmd_id=ModelingCmdId(uuid.uuid4()) 
-            )
-        ))
-
-        websocket.send(WebSocketRequest(
-            modeling_cmd_req(
-                cmd=ModelingCmd(
-                    extend_path(
-                        path=str(sketch_path_id),
-                        segment=line(
-                            end={
-                                "x": 0,
-                                "y": 10,
-                                "z": 0,
-                            },
-                            relative=True,
-                        )
-                    )), 
+                    )),
                 cmd_id=ModelingCmdId(uuid.uuid4())
             )
         ))
@@ -57,7 +39,25 @@
                 cmd=ModelingCmd(
                     extend_path(
                         path=str(sketch_path_id),
-                        segment=line(
+                        segment=Line(
+                            end={
+                                "x": 0,
+                                "y": 10,
+                                "z": 0,
+                            },
+                            relative=True,
+                        )
+                    )),
+                cmd_id=ModelingCmdId(uuid.uuid4())
+            )
+        ))
+
+        websocket.send(WebSocketRequest(
+            modeling_cmd_req(
+                cmd=ModelingCmd(
+                    extend_path(
+                        path=str(sketch_path_id),
+                        segment=Line(
                             end={
                                 "x": -10,
                                 "y": 0,
@@ -65,7 +65,7 @@
                             },
                             relative=True,
                         )
-                    )), 
+                    )),
                 cmd_id=ModelingCmdId(uuid.uuid4())
             )
         ))
@@ -77,7 +77,7 @@
             modeling_cmd_req(
                 cmd=ModelingCmd(
                     close_path(
-                        path_id=ModelingCmdId(sketch_path_id) # Notice that we need to provide the sketch path UUID we created in the beginning. 
+                        path_id=ModelingCmdId(sketch_path_id) # Notice that we need to provide the sketch path UUID we created in the beginning.
                     )
                 ),
                 cmd_id=ModelingCmdId(uuid.uuid4())

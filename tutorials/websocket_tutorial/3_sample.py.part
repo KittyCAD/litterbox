@@ -5,7 +5,7 @@ from kittycad.models import (
     ModelingCmdId,
     WebSocketRequest,
 )
-from kittycad.models.path_segment import PathSegment, line
+from kittycad.models.path_segment import PathSegment, Line
 from kittycad.models.modeling_cmd import (
     default_camera_look_at,
     start_path,
