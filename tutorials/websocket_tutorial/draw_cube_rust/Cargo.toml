@@ -7,7 +7,7 @@ edition = "2021"
 [dependencies]
 color-eyre = "0.6.3"
 futures = "0.3.31"
-image = "0.25.2"
+image = "0.25.3"
 kittycad = "0.3.23"
 reqwest = "0.12"
 serde = "1.0.210"
