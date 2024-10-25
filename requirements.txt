@@ -1,1 +1,1 @@
-kittycad==0.7.1
+kittycad==0.7.2
