@@ -20,7 +20,7 @@ use uuid::Uuid;
 async fn main() -> Result<()> {
     // Set up the API client.
     let kittycad_api_token =
-        env::var("KITTYCAD_API_TOKEN").context("You must set $KITTYCAD_API_TOKEN")?;
+        env::var("ZOO_API_TOKEN").context("You must set $ZOO_API_TOKEN")?;
     let kittycad_api_client = kittycad::Client::new(kittycad_api_token);
 
     // Where should the final PNG be saved?

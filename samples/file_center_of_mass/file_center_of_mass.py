@@ -10,7 +10,7 @@ from kittycad.models.file_import_format import FileImportFormat
 from kittycad.models.unit_length import UnitLength
 
 # Create a new client with your token parsed from the environment variable:
-#   KITTYCAD_API_TOKEN.
+#   ZOO_API_TOKEN.
 client = ClientFromEnv(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.

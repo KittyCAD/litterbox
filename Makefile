@@ -9,7 +9,7 @@ endif
 test: docker-image ## Test all the python files.
 	docker run --rm -i $(DOCKER_FLAGS) \
 		--name litterbox-dev \
-		-e KITTYCAD_API_TOKEN \
+		-e ZOO_API_TOKEN \
 		--disable-content-trust \
 		-v $(CURDIR):/home/user/src \
 		--workdir /home/user/src \
@@ -19,7 +19,7 @@ test: docker-image ## Test all the python files.
 format: docker-image ## Format all the python files.
 	docker run --rm -i $(DOCKER_FLAGS) \
 		--name litterbox-dev \
-		-e KITTYCAD_API_TOKEN \
+		-e ZOO_API_TOKEN \
 		--disable-content-trust \
 		-v $(CURDIR):/home/user/src \
 		--workdir /home/user/src \
@@ -29,7 +29,7 @@ format: docker-image ## Format all the python files.
 shell: docker-image ## Pop into a shell in the docker image.
 	docker run --rm -i $(DOCKER_FLAGS) \
 		--name litterbox-dev-shell \
-		-e KITTYCAD_API_TOKEN \
+		-e ZOO_API_TOKEN \
 		--disable-content-trust \
 		-v $(CURDIR):/home/user/src \
 		--workdir /home/user/src \

@@ -11,7 +11,7 @@ from kittycad.models.unit_density import UnitDensity
 from kittycad.models.unit_mass import UnitMass
 
 # Create a new client with your token parsed from the environment variable:
-#   KITTYCAD_API_TOKEN.
+#   ZOO_API_TOKEN.
 client = ClientFromEnv(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.

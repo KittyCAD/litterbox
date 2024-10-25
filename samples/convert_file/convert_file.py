@@ -13,7 +13,7 @@ from kittycad.models.file_import_format import FileImportFormat
 from kittycad.types import Unset
 
 # Create a new client with your token parsed from the environment variable:
-#   KITTYCAD_API_TOKEN.
+#   ZOO_API_TOKEN.
 client = ClientFromEnv(timeout=500, verify_ssl=True)
 
 # Convert a file from OBJ to STL.

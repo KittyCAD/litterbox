@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// Create a new client with your token parsed from the environment variable:
-	// KITTYCAD_API_TOKEN.
+	// ZOO_API_TOKEN.
 	client, _ := kittycad.NewClientFromEnv("your apps user agent")
 
 	fileBytes, _ := os.ReadFile("./seesaw.obj")

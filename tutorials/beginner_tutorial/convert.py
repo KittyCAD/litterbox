@@ -11,7 +11,7 @@ from kittycad.types import Unset
 
 # Create a new function to convert an OBJ file to an STL file.
 def convertOBJtoSTL():
-    # Create a new client with your token parsed from the environment variable (KITTYCAD_API_TOKEN)
+    # Create a new client with your token parsed from the environment variable (ZOO_API_TOKEN)
     client = ClientFromEnv(timeout=500, verify_ssl=True)
 
     # Read in the contents of the file.

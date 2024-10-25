@@ -9,7 +9,7 @@ import (
 
 func main() {
 	// Create a new client with your token parsed from the environment variable:
-	// KITTYCAD_API_TOKEN.
+	// ZOO_API_TOKEN.
 	client, err := kittycad.NewClientFromEnv("your apps user agent")
 	if err != nil {
 		panic(err)
