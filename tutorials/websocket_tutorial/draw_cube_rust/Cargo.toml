@@ -12,6 +12,6 @@ kittycad = "0.3.25"
 reqwest = "0.12"
 serde = "1.0.214"
 serde_json = "1.0.132"
-tokio = { version = "1.41.0", features = ["macros", "rt"] }
+tokio = { version = "1.41.1", features = ["macros", "rt"] }
 tokio-tungstenite = "0.24.0"
 uuid = "1.11.0"
