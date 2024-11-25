@@ -24,7 +24,7 @@ jobs:
                   ref: ${{ github.event.pull_request.head.ref }}
 
             - name: Install the latest version of uv
-              uses: astral-sh/setup-uv@v3
+              uses: astral-sh/setup-uv@v4
             - name: Install deps
               run: |
                   uv venv .venv
