@@ -9,14 +9,14 @@ from kittycad.models import (
     Direction,
     ImageFormat,
     ImportFile,
-    InputFormat,
+    InputFormat3d,
     ModelingCmd,
     ModelingCmdId,
     System,
     UnitLength,
     WebSocketRequest,
 )
-from kittycad.models.input_format import OptionObj
+from kittycad.models.input_format3d import OptionObj
 from kittycad.models.modeling_cmd import (
     OptionDefaultCameraFocusOn,
     OptionImportFiles,
@@ -53,7 +53,7 @@ def test_ws_import():
                 cmd=ModelingCmd(
                     OptionImportFiles(
                         files=[ImportFile(data=content, path=file_name)],
-                        format=InputFormat(
+                        format=InputFormat3d(
                             OptionObj(
                                 units=UnitLength.M,
                                 coords=System(
