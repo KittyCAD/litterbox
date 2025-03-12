@@ -194,6 +194,7 @@ def make_cube():
             message_dict = message.model_dump()
             print(message_dict)
             if (
+                'modeling_response' in message_dict["resp"]["data"] and
                 message_dict["resp"]["data"]["modeling_response"]["type"]
                 == "take_snapshot"
             ):

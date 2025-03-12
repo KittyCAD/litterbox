@@ -6,3 +6,5 @@ github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aN
 github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/kittycad/kittycad.go v0.2.39 h1:ocYnXRWaW2Sspf5UmeLg4bzqGG+HbSGJKvMpCiEl4Us=
 github.com/kittycad/kittycad.go v0.2.39/go.mod h1:ct5x81TrcTzbvOt0Xl4EqzN3E30clnWyorc0ck8vVPE=
+github.com/kittycad/kittycad.go v0.2.40 h1:Et21Jzm5DnilyFs8AVVGrfLUzTrtr/7Jd+CQ/fKaovA=
+github.com/kittycad/kittycad.go v0.2.40/go.mod h1:ctcNwOmIPm6AgbfThzFbYSs//Kj8acXmeV/3g30GPTA=
