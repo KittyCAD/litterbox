@@ -16,7 +16,8 @@ on:
       - '**/Cargo.lock'
       - 'ORIGINALVOXEL-3.obj'
       - .github/workflows/build-test.yml
-      - requirements.txt
+      - pyproject.toml
+      - uv.lock
       - package.json
   pull_request:
     paths:
@@ -31,7 +32,8 @@ on:
       - '**/Cargo.lock'
       - 'ORIGINALVOXEL-3.obj'
       - .github/workflows/build-test.yml
-      - requirements.txt
+      - pyproject.toml
+      - uv.lock
       - package.json
   workflow_dispatch:
     inputs:
@@ -193,18 +195,14 @@ jobs:
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v5
       - name: Install deps
-        run: |
-          uv venv .venv
-          echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
-          echo "$PWD/.venv/bin" >> $GITHUB_PATH
-          uv pip install  -r requirements.txt
+        run: "uv venv .venv\necho \"VIRTUAL_ENV=.venv\" >> $GITHUB_ENV\necho \"$PWD/.venv/bin\" >> $GITHUB_PATH\nuv sync \n"
       - name: remove previous outputs
         shell: bash
         run: |
           rm -rf tutorials/**/*output.{stl,obj,step,json}
           rm -rf samples/**/*output.{stl,obj,step,json}
       - name: test outputs
-        run: |2
+        run: |
           files=( "./tutorials/conversion_obj_step"
                   "./tutorials/conversion_obj_stl"
                   "./tutorials/get_mass_volume"
