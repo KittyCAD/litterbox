@@ -30,10 +30,7 @@ jobs:
                   uv venv .venv
                   echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
                   echo "$PWD/.venv/bin" >> $GITHUB_PATH
-                  uv pip install \
-                    isort \
-                    ruff
-                  isort . */*/*.py
+                  uv sync
                   ruff format
                   ruff check --fix . */*/*.py
 

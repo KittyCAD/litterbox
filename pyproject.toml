@@ -1,0 +1,27 @@
+[project]
+name = "litterbox"
+version = "0.1.0"
+description = "KittyCAD API examples and tutorials"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "kittycad==1.0.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff",
+    "mypy",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]  # Allow longer lines for examples
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
