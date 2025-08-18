@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "KittyCAD API examples and tutorials"
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = ["kittycad>=1.0.1"]
+dependencies = [
+    "kittycad>=1.0.2",
+]
 
 [tool.uv]
 dev-dependencies = ["ruff", "mypy"]
