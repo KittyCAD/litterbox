@@ -5,7 +5,7 @@ description = "KittyCAD API examples and tutorials"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "kittycad",
+    "kittycad>=1.0.0",
 ]
 
 [tool.uv]
@@ -13,9 +13,6 @@ dev-dependencies = [
     "ruff",
     "mypy",
 ]
-
-[tool.uv.sources]
-kittycad = { path = "../kittycad.py/dist/kittycad-1.0.0.tar.gz" }
 
 [tool.ruff]
 line-length = 88
