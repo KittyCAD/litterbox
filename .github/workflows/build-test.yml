@@ -184,6 +184,13 @@ jobs:
       matrix:
         python-version: [3.9]
     steps:
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          # required
+          app-id: ${{ secrets.GH_ORG_APP_ID }}
+          private-key: ${{ secrets.GH_ORG_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
@@ -253,7 +260,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git remote set-url origin https://${{ github.actor }}:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git
           git fetch origin
           git commit -am "Updating script outputs"
           git push origin ${{github.event.pull_request.head.ref }}
