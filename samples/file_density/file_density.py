@@ -3,16 +3,14 @@
 import json
 import os
 
-from kittycad.api.file import create_file_density
-from kittycad.client import ClientFromEnv
-from kittycad.models.error import Error
+from kittycad import KittyCAD, KittyCADAPIError
 from kittycad.models.file_import_format import FileImportFormat
 from kittycad.models.unit_density import UnitDensity
 from kittycad.models.unit_mass import UnitMass
 
 # Create a new client with your token parsed from the environment variable:
 #   ZOO_API_TOKEN.
-client = ClientFromEnv(timeout=500, verify_ssl=True)
+client = KittyCAD(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.
 file = open("./ORIGINALVOXEL-3.obj", "rb")
@@ -20,17 +18,16 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fm = create_file_density.sync(
-    client=client,
-    material_mass=123,
-    material_mass_unit=UnitMass.G,
-    output_unit=UnitDensity.KG_M3,
-    src_format=FileImportFormat.OBJ,
-    body=content,
-)
-
-if isinstance(fm, Error) or fm is None:
-    raise Exception("There was a problem")
+try:
+    fm = client.file.create_file_density(
+        material_mass=123,
+        material_mass_unit=UnitMass.G,
+        output_unit=UnitDensity.KG_M3,
+        src_format=FileImportFormat.OBJ,
+        body=content,
+    )
+except KittyCADAPIError as e:
+    raise Exception(f"There was a problem: {e}")
 
 print(f"File density (kg/m^3): {fm.density}")
 

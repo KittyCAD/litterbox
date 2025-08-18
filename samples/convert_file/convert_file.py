@@ -3,18 +3,15 @@
 
 from typing import Dict
 
-from kittycad.api.file import create_file_conversion
-from kittycad.client import ClientFromEnv
+from kittycad import KittyCAD, KittyCADAPIError
 from kittycad.models.base64data import Base64Data
-from kittycad.models.error import Error
-from kittycad.models.file_conversion import FileConversion
 from kittycad.models.file_export_format import FileExportFormat
 from kittycad.models.file_import_format import FileImportFormat
 from kittycad.types import Unset
 
 # Create a new client with your token parsed from the environment variable:
 #   ZOO_API_TOKEN.
-client = ClientFromEnv(timeout=500, verify_ssl=True)
+client = KittyCAD(timeout=500, verify_ssl=True)
 
 # Convert a file from OBJ to STL.
 # Read in the contents of the file.
@@ -23,17 +20,14 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-result = create_file_conversion.sync(
-    client=client,
-    src_format=FileImportFormat.OBJ,
-    output_format=FileExportFormat.STL,
-    body=content,
-)
-
-if isinstance(result, Error) or result is None:
-    raise Exception("There was a problem")
-
-fc: FileConversion = result
+try:
+    fc = client.file.create_file_conversion(
+        src_format=FileImportFormat.OBJ,
+        output_format=FileExportFormat.STL,
+        body=content,
+    )
+except KittyCADAPIError as e:
+    raise Exception(f"There was a problem: {e}")
 
 print(f"File conversion id: {fc.id}")
 print(f"File conversion status: {fc.status}")

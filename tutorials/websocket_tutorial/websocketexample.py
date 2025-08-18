@@ -2,8 +2,7 @@ import json
 import os
 import uuid
 
-from kittycad.api.modeling import modeling_commands_ws
-from kittycad.client import ClientFromEnv
+from kittycad import KittyCAD
 from kittycad.models import ImageFormat, ModelingCmd, ModelingCmdId, WebSocketRequest
 from kittycad.models.modeling_cmd import (
     OptionClosePath,
@@ -20,14 +19,13 @@ from kittycad.models.web_socket_request import OptionModelingCmdReq
 
 def make_cube():
     # Create our client.
-    client = ClientFromEnv()
+    client = KittyCAD()
 
     # Create a unique id for the sketch path.
     sketch_path_id = uuid.uuid4()
 
     # Connect to the websocket.
-    with modeling_commands_ws.WebSocket(
-        client=client,
+    with client.modeling.modeling_commands_ws(
         fps=30,
         show_grid=True,
         unlocked_framerate=False,
