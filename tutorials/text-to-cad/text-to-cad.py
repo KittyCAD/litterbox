@@ -1,32 +1,29 @@
 import time
 
-from kittycad.api.ml import create_text_to_cad, get_text_to_cad_model_for_user
-from kittycad.client import ClientFromEnv
+from kittycad import KittyCAD, KittyCADAPIError
 from kittycad.models import (
     ApiCallStatus,
-    Error,
     FileExportFormat,
     TextToCad,
     TextToCadCreateBody,
 )
 
 # Create our client.
-client = ClientFromEnv()
+client = KittyCAD()
 
 # Prompt the API to generate a 3D model from text.
-response = create_text_to_cad.sync(
-    client=client,
-    output_format=FileExportFormat.STEP,
-    body=TextToCadCreateBody(
-        prompt="Design a gear with 40 teeth",
-    ),
-)
-
-if isinstance(response, Error) or response is None:
-    print(f"Error: {response}")
+try:
+    response = client.ml.create_text_to_cad(
+        output_format=FileExportFormat.STEP,
+        body=TextToCadCreateBody(
+            prompt="Design a gear with 40 teeth",
+        ),
+    )
+except KittyCADAPIError as e:
+    print(f"Error: {e}")
     exit(1)
 
-result: TextToCad = response
+result = response
 
 # Polling to check if the task is complete
 while result.completed_at is None:
@@ -34,16 +31,22 @@ while result.completed_at is None:
     time.sleep(5)
 
     # Check the status of the task
-    response = get_text_to_cad_model_for_user.sync(
-        client=client,
-        id=result.id,
-    )
-
-    if isinstance(response, Error) or response is None:
-        print(f"Error: {response}")
+    try:
+        status_response = client.ml.get_text_to_cad_model_for_user(
+            id=result.id,
+        )
+    except KittyCADAPIError as e:
+        print(f"Error: {e}")
         exit(1)
 
-    result = response
+    # The response is a TextToCadResponse, extract the actual data
+    response_data = status_response.root
+    # For this example, we expect it to be a TextToCad instance
+    if isinstance(response_data, TextToCad):
+        result = response_data
+    else:
+        print(f"Unexpected response type: {type(response_data)}")
+        exit(1)
 
 if result.status == ApiCallStatus.FAILED:
     # Print out the error message

@@ -3,15 +3,13 @@
 import json
 import os
 
-from kittycad.api.file import create_file_center_of_mass
-from kittycad.client import ClientFromEnv
-from kittycad.models.error import Error
+from kittycad import KittyCAD, KittyCADAPIError
 from kittycad.models.file_import_format import FileImportFormat
 from kittycad.models.unit_length import UnitLength
 
 # Create a new client with your token parsed from the environment variable:
 #   ZOO_API_TOKEN.
-client = ClientFromEnv(timeout=500, verify_ssl=True)
+client = KittyCAD(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.
 file = open("./seesaw.obj", "rb")
@@ -19,15 +17,14 @@ file = open("./seesaw.obj", "rb")
 content = file.read()
 file.close()
 
-fm = create_file_center_of_mass.sync(
-    client=client,
-    output_unit=UnitLength.M,
-    src_format=FileImportFormat.OBJ,
-    body=content,
-)
-
-if isinstance(fm, Error) or fm is None:
-    raise Exception("There was a problem")
+try:
+    fm = client.file.create_file_center_of_mass(
+        output_unit=UnitLength.M,
+        src_format=FileImportFormat.OBJ,
+        body=content,
+    )
+except KittyCADAPIError as e:
+    raise Exception(f"There was a problem: {e}")
 
 if fm.center_of_mass is None:
     raise Exception("There was a problem")

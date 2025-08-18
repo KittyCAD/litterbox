@@ -3,16 +3,14 @@
 import json
 import os
 
-from kittycad.api.file import create_file_surface_area
-from kittycad.client import ClientFromEnv
-from kittycad.models.error import Error
+from kittycad import KittyCAD, KittyCADAPIError
 from kittycad.models.file_import_format import FileImportFormat
 from kittycad.models.file_surface_area import FileSurfaceArea
 from kittycad.models.unit_area import UnitArea
 
 # Create a new client with your token parsed from the environment variable:
 #   ZOO_API_TOKEN.
-client = ClientFromEnv(timeout=500, verify_ssl=True)
+client = KittyCAD(timeout=500, verify_ssl=True)
 
 # Read in the contents of the file.
 file = open("./ORIGINALVOXEL-3.obj", "rb")
@@ -20,15 +18,14 @@ file = open("./ORIGINALVOXEL-3.obj", "rb")
 content = file.read()
 file.close()
 
-fm = create_file_surface_area.sync(
-    client=client,
-    output_unit=UnitArea.M2,
-    src_format=FileImportFormat.OBJ,
-    body=content,
-)
-
-if isinstance(fm, Error) or fm is None:
-    raise Exception("There was a problem")
+try:
+    fm = client.file.create_file_surface_area(
+        output_unit=UnitArea.M2,
+        src_format=FileImportFormat.OBJ,
+        body=content,
+    )
+except KittyCADAPIError as e:
+    raise Exception(f"There was a problem: {e}")
 
 fm: FileSurfaceArea = fm
 
