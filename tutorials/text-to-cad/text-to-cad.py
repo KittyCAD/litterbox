@@ -6,11 +6,7 @@ from kittycad.models import (
     FileExportFormat,
     TextToCad,
     TextToCadCreateBody,
-    TextToCadResponse,
-    TextToCadIteration,
-    TextToCadMultiFileIteration,
 )
-from typing import Union
 
 # Create our client.
 client = KittyCAD()
