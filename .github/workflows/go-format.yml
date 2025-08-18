@@ -32,7 +32,7 @@ jobs:
                 key: go-${{ matrix.go-version }}
             - name: installing golines
               run: go install github.com/segmentio/golines@latest
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
               with:
                   ref: ${{ github.event.pull_request.head.ref }}
             - name: running golines
