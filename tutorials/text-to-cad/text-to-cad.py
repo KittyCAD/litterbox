@@ -6,7 +6,11 @@ from kittycad.models import (
     FileExportFormat,
     TextToCad,
     TextToCadCreateBody,
+    TextToCadResponse,
+    TextToCadIteration,
+    TextToCadMultiFileIteration,
 )
+from typing import Union
 
 # Create our client.
 client = KittyCAD()
@@ -23,7 +27,7 @@ except KittyCADAPIError as e:
     print(f"Error: {e}")
     exit(1)
 
-result: TextToCad = response
+result = response
 
 # Polling to check if the task is complete
 while result.completed_at is None:
@@ -32,14 +36,21 @@ while result.completed_at is None:
 
     # Check the status of the task
     try:
-        response = client.ml.get_text_to_cad_model_for_user(
+        status_response = client.ml.get_text_to_cad_model_for_user(
             id=result.id,
         )
     except KittyCADAPIError as e:
         print(f"Error: {e}")
         exit(1)
 
-    result = response
+    # The response is a TextToCadResponse, extract the actual data
+    response_data = status_response.root
+    # For this example, we expect it to be a TextToCad instance
+    if isinstance(response_data, TextToCad):
+        result = response_data
+    else:
+        print(f"Unexpected response type: {type(response_data)}")
+        exit(1)
 
 if result.status == ApiCallStatus.FAILED:
     # Print out the error message
