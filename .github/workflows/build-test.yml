@@ -37,7 +37,6 @@ on:
     inputs:
 jobs:
   build-test-go-versions:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -53,7 +52,6 @@ jobs:
           - ./samples/file_volume
           - ./samples/file_center_of_mass
           - ./samples/file_surface_area
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -62,7 +60,6 @@ jobs:
         uses: actions/setup-go@v5.4.0
         with:
           go-version: ${{ matrix.go-version }}
-
       - name: Run scripts
         shell: bash
         run: |
@@ -70,9 +67,7 @@ jobs:
           go run $FILE
         env:
           ZOO_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-
   build-test-python-versions:
-
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -92,7 +87,6 @@ jobs:
           - ./samples/file_volume
           - ./samples/file_center_of_mass
           - ./samples/file_surface_area
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -101,16 +95,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v5
       - name: Install deps
         run: |
-            uv venv .venv
-            echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
-            echo "$PWD/.venv/bin" >> $GITHUB_PATH
-            uv pip install  -r requirements.txt
-
+          uv venv .venv
+          echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+          echo "$PWD/.venv/bin" >> $GITHUB_PATH
+          uv sync
       - name: Run scripts
         shell: bash
         run: |
@@ -125,7 +117,6 @@ jobs:
           python $FILE
         env:
           ZOO_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-
   build-test-js-versions:
     runs-on: ubuntu-latest
     strategy:
@@ -140,7 +131,6 @@ jobs:
           - ./samples/file_volume
           - ./samples/file_center_of_mass
           - ./samples/file_surface_area
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -151,7 +141,6 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
       - run: yarn install
-
       - name: Run scripts
         shell: bash
         run: |
@@ -159,7 +148,6 @@ jobs:
           node $FILE
         env:
           ZOO_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-
   build-test-rs-versions:
     runs-on: ubuntu-latest
     strategy:
@@ -167,7 +155,6 @@ jobs:
       matrix:
         test-path:
           - ./tutorials/websocket_tutorial/draw_cube_rust
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -177,7 +164,6 @@ jobs:
         with:
           profile: minimal
           toolchain: stable
-
       - name: Run sources
         shell: bash
         run: |
@@ -185,7 +171,6 @@ jobs:
           cargo run
         env:
           ZOO_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-
   commit-script-outputs:
     # Using the python script to commit the output of the scripts
     # The go scripts should have the same output
@@ -205,25 +190,21 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v5
       - name: Install deps
         run: |
-            uv venv .venv
-            echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
-            echo "$PWD/.venv/bin" >> $GITHUB_PATH
-            uv pip install  -r requirements.txt
-
+          uv venv .venv
+          echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+          echo "$PWD/.venv/bin" >> $GITHUB_PATH
+          uv pip install  -r requirements.txt
       - name: remove previous outputs
         shell: bash
         run: |
           rm -rf tutorials/**/*output.{stl,obj,step,json}
           rm -rf samples/**/*output.{stl,obj,step,json}
-
       - name: test outputs
-        run: |
-
+        run: |2
           files=( "./tutorials/conversion_obj_step"
                   "./tutorials/conversion_obj_stl"
                   "./tutorials/get_mass_volume"
@@ -259,27 +240,22 @@ jobs:
           echo "all done"
         env:
           ZOO_API_TOKEN: ${{secrets.KITTYCAD_API_TOKEN}}
-
-
       - name: stage outputs
         run: |
           git add "tutorials/**/*output.*"
           git add "tutorials/**/*.png"
           git add "samples/**/*output.*"
-
       - name: git status
         run: git status
-
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)
-
       - name: Commit changes, if any
         if: steps.git-check.outputs.modified == 'true' &&  github.actor != 'dependabot[bot]'
         run: |
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-            git fetch origin
-            git commit -am "Updating script outputs"
-            git push origin ${{github.event.pull_request.head.ref }}
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git fetch origin
+          git commit -am "Updating script outputs"
+          git push origin ${{github.event.pull_request.head.ref }}
