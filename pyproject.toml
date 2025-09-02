@@ -3,9 +3,9 @@ name = "litterbox"
 version = "0.1.0"
 description = "KittyCAD API examples and tutorials"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dependencies = [
-    "kittycad>=1.0.2",
+    "kittycad>=1.1.0",
 ]
 
 [tool.uv]

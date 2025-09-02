@@ -145,7 +145,6 @@ def make_cube():
                 OptionModelingCmdReq(
                     cmd=ModelingCmd(
                         OptionExtrude(
-                            cap=True,
                             distance=10,
                             target=ModelingCmdId(sketch_path_id),
                         )
