@@ -1,4 +1,4 @@
-import { file } from '@kittycad/lib/import'
+import { file } from '@kittycad/lib'
 import fsp from 'fs/promises'
 
 async function convertOBJtoSTEP() {
