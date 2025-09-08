@@ -7,9 +7,12 @@ async function main() {
     const body = await fsp.readFile('./ORIGINALVOXEL-3.obj', 'base64')
     // LITTERBOX-END-NON-EDITABLE-SECTION
 
-    const steelDensityPerCubicMillimeter = 0.00785
+    // Steel density ≈ 7850 kg/m^3
+    const steelDensityKgPerM3 = 7850
     const response = await file.create_file_mass({
-        material_density: steelDensityPerCubicMillimeter,
+        material_density: steelDensityKgPerM3,
+        material_density_unit: 'kg:m3',
+        output_unit: 'g',
         src_format: 'obj',
         body,
     })

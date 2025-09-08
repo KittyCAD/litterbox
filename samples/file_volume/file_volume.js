@@ -8,6 +8,7 @@ async function main() {
     // LITTERBOX-END-NON-EDITABLE-SECTION
 
     const response = await file.create_file_volume({
+        output_unit: 'm3',
         src_format: 'obj',
         body,
     })

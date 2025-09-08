@@ -8,13 +8,13 @@ async function main() {
     // LITTERBOX-END-NON-EDITABLE-SECTION
 
     const response = await file.create_file_center_of_mass({
-        material_density: 7,
+        output_unit: 'mm',
         src_format: 'obj',
         body,
     })
     if ('error_code' in response) throw response
     const { center_of_mass } = response
-    console.log(`File center of mass: ${center_of_mass}`)
+    console.log(`File center of mass: ${JSON.stringify(center_of_mass)}`)
     const partInfo = {
         title: 'output.json',
         center_of_mass,

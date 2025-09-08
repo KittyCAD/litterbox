@@ -9,6 +9,8 @@ async function main() {
 
     const response = await file.create_file_density({
         material_mass: 123,
+        material_mass_unit: 'g',
+        output_unit: 'kg:m3',
         src_format: 'obj',
         body,
     })
