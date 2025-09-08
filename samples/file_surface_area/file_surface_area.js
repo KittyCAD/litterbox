@@ -1,7 +1,7 @@
 import fsp from 'fs/promises'
 import { exec } from 'child_process'
 import { promisify } from 'util'
-import { file } from '@kittycad/lib/import'
+import { file } from '@kittycad/lib'
 
 async function main() {
     const body = await fsp.readFile('./ORIGINALVOXEL-3.obj', 'base64')
