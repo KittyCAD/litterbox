@@ -184,13 +184,6 @@ jobs:
       matrix:
         python-version: [3.9]
     steps:
-      - uses: actions/create-github-app-token@v2
-        id: app-token
-        with:
-          # required
-          app-id: ${{ secrets.GH_ORG_APP_ID }}
-          private-key: ${{ secrets.GH_ORG_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
@@ -252,15 +245,9 @@ jobs:
           git add "samples/**/*output.*"
       - name: git status
         run: git status
-      - name: Check for modified files
-        id: git-check
-        run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)
-      - name: Commit changes, if any
-        if: steps.git-check.outputs.modified == 'true' &&  github.actor != 'dependabot[bot]'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git remote set-url origin https://${{ github.actor }}:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git
-          git fetch origin
-          git commit -am "Updating script outputs"
-          git push origin ${{github.event.pull_request.head.ref }}
+      - name: Commit generated files
+        uses: KittyCAD/gha-actions-public/pr-commit@main
+        with:
+          app-id: ${{ secrets.GH_ORG_APP_ID }}
+          private-key: ${{ secrets.GH_ORG_APP_PRIVATE_KEY }}
+          commit-message: "Updating script outputs"
