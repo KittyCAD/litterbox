@@ -28,7 +28,7 @@ jobs:
           uv sync
           uv run ruff format
           uv run ruff check --fix . */*/*.py
-      - name: Commit generated API files
+      - name: Commit generated files
         uses: KittyCAD/gha-actions-public/pr-commit@main
         with:
           app-id: ${{ secrets.GH_ORG_APP_ID }}
