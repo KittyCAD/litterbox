@@ -12,7 +12,6 @@ on:
         paths:
             - '**.go'
     workflow_dispatch:
-        inputs:
 jobs:
     format:
         # Check if the PR is not from a fork
@@ -37,16 +36,9 @@ jobs:
                   ref: ${{ github.event.pull_request.head.ref }}
             - name: running golines
               run: golines --max-len=80 --reformat-tags --write-output .
-            - name: Check for modified files
-              id: git-check
-              run: echo ::set-output name=modified::$(if git diff-index --ignore-submodules --quiet HEAD --; then echo "false"; else echo "true"; fi)
-
-            - name: Commit changes, if any
-              if: steps.git-check.outputs.modified == 'true'
-              run: |
-                  git config --local user.email "github-actions[bot]@users.noreply.github.com"
-                  git config --local user.name "github-actions[bot]"
-                  git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-                  git fetch origin
-                  git commit -am "LOOK ON MY REFORMAT, YE MIGHTY, AND DESPAIR!"
-                  git push origin ${{github.event.pull_request.head.ref }}
+            - name: Commit generated API files
+              uses: KittyCAD/gha-actions-public/pr-commit@main
+              with:
+                app-id: ${{ secrets.GH_ORG_APP_ID }}
+                private-key: ${{ secrets.GH_ORG_APP_PRIVATE_KEY }}
+                commit-message: "LOOK ON MY REFORMAT, YE MIGHTY, AND DESPAIR!"
