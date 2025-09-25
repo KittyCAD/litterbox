@@ -36,7 +36,7 @@ jobs:
                   ref: ${{ github.event.pull_request.head.ref }}
             - name: running golines
               run: golines --max-len=80 --reformat-tags --write-output .
-            - name: Commit generated API files
+            - name: Commit generated files
               uses: KittyCAD/gha-actions-public/pr-commit@main
               with:
                 app-id: ${{ secrets.GH_ORG_APP_ID }}
