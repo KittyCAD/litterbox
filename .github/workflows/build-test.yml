@@ -55,11 +55,11 @@ jobs:
           - ./samples/file_center_of_mass
           - ./samples/file_surface_area
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
       - name: Set up Go ${{ matrix.go-version }}
-        uses: actions/setup-go@v5.4.0
+        uses: actions/setup-go@v6.0.0
         with:
           go-version: ${{ matrix.go-version }}
       - name: Run scripts
@@ -90,15 +90,15 @@ jobs:
           - ./samples/file_center_of_mass
           - ./samples/file_surface_area
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
       - name: Install deps
         run: |
           uv venv .venv
@@ -134,11 +134,11 @@ jobs:
           - ./samples/file_center_of_mass
           - ./samples/file_surface_area
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
       - name: Set up node ${{ matrix.python-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node }}
           cache: 'yarn'
@@ -158,7 +158,7 @@ jobs:
         test-path:
           - ./tutorials/websocket_tutorial/draw_cube_rust
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           lfs: true
       - name: Set up node ${{ matrix.python-version }}
@@ -184,16 +184,16 @@ jobs:
       matrix:
         python-version: [3.9]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           lfs: true
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
       - name: Install deps
         run: "uv venv .venv\necho \"VIRTUAL_ENV=.venv\" >> $GITHUB_ENV\necho \"$PWD/.venv/bin\" >> $GITHUB_PATH\nuv sync \n"
       - name: remove previous outputs
