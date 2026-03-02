@@ -32,7 +32,7 @@ while result.completed_at is None:
 
     # Check the status of the task
     try:
-        status_response = client.ml.get_text_to_cad_model_for_user(
+        status_response = client.ml.get_text_to_cad_part_for_user(
             id=result.id,
         )
     except KittyCADAPIError as e:
